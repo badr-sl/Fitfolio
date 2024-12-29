@@ -1,0 +1,5 @@
+com.example.fitfolio.controllers.UserController#saveRole(Lcom/example/fitfolio/entities/Role;)Lcom/example/fitfolio/entities/Role;
+false
+1ead8836d328f40173c389041f046947
+==
+addNewRole com.example.fitfolio.service.UserService#addNewRole(Lcom/example/fitfolio/entities/Role;)Lcom/example/fitfolio/entities/Role;

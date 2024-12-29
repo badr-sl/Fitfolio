@@ -1,0 +1,5 @@
+com.example.fitfolio.service.ActiviteService#listActivitesByGoal(Ljava/lang/String;)Ljava/util/List;
+false
+e308ef491dec93cb79bd88e110cbd1b4
+==
+findByObjectif com.example.fitfolio.repo.ActiviteRepository#findByObjectif(Ljava/lang/String;)Ljava/util/List;

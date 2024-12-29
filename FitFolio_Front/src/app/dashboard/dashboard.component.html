@@ -1,0 +1,301 @@
+<div class="container mt-4">
+  <!-- Welcome Section -->
+  <div class="row mb-4">
+    <div class="col-12">
+      <h3>Welcome Back, <strong>{{ userName }}</strong></h3>
+      <button class="btn btn-outline-primary btn-sm mt-2" (click)="downloadPDF()">Télécharger votre PDF</button>
+    </div>
+  </div>
+
+  <!-- First Row: Buttons and BMI Card (First Container), Water Intake (Second Container) -->
+  <div class="row mb-4">
+    <!-- First Container -->
+    <div class="col-md-8">
+      <div class="row mb-4 g-3 d-flex align-items-stretch">
+        <!-- Card: Today's Target -->
+        <div class="col-md-3 d-flex"> <!-- Changed to col-md-6 for equal width -->
+          <div class="card p-3 d-flex flex-column justify-content-between h-100 w-100">
+            <div class="btn-container">
+              <p>Today's Target</p>
+            </div>
+            <button class="btn-c mt-auto">Check</button>
+          </div>
+        </div>
+        
+        <!-- Card: Today's Meal Plan -->
+        <div class="col-md-3 d-flex"> <!-- Changed to col-md-6 for equal width -->
+          <div class="card p-3 d-flex flex-column justify-content-between h-100 w-100">
+            <div class="btn-container">
+              <p>Today's Meal Plan</p>
+            </div>
+            <button class="btn-c mt-auto">Check</button>
+          </div>
+        </div>
+        
+      
+      
+        <!-- BMI Card -->
+        <div class="col-md-6 d-flex">
+          <div class="card bmi-card h-100"> <!-- Ensures the BMI card takes full height -->
+            <div class="bmi-content">
+              <div class="bmi-text">
+                <h5 class="card-title">BMI (Body Mass Index)</h5>
+                <p class="bmi-status">{{ bmiStatus }}</p>
+              </div>
+              <div class="bmi-pie-container">
+                <img src="/assets/Banner--Pie-Ellipse.png" alt="BMI Chart" class="bmi-image">
+                <div class="bmi-value-overlay">{{ bmiValue }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    
+      <!-- Second Row -->
+      <div class="row g-3"> <!-- Added 'g-3' for spacing between rows -->
+        <!-- Sleep Card -->
+        <div class="col-md-6 d-flex">
+          <div class="card sleep-card flex-fill d-flex align-items-center">
+            <div class="card-content">
+              <h5 class="card-title">Sleep</h5>
+              <p class="card-text">{{ sleepTime }}</p>
+            </div>
+            <div class="card-image">
+              <img src="/assets/Sleep-Graph.png" class="sleep-image">
+            </div>
+          </div>
+        </div>
+    
+        <!-- Calories Card -->
+        <div class="col-md-6 d-flex">
+          <div class="card calories-card flex-fill">
+            <div class="card-content">
+              <h5 class="card-title">Calories</h5>
+              <p class="card-text">{{ caloriesConsumed }} kCal</p>
+            </div>
+            <div class="circular-progress-container">
+              <svg class="circular-progress" viewBox="0 0 36 36">
+                <defs>
+                  <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#70c1ff" />
+                    <stop offset="100%" stop-color="#d375eb" />
+                  </linearGradient>
+                </defs>
+                <path
+                  class="circle-bg"
+                  d="M18 2.0845
+                     a 15.9155 15.9155 0 1 1 0 31.831
+                     a 15.9155 15.9155 0 1 1 0 -31.831"
+                />
+                <path
+                  class="circle"
+                  [attr.stroke-dasharray]="progressPercentage + ', 100'"
+                  d="M18 2.0845
+                     a 15.9155 15.9155 0 1 1 0 31.831
+                     a 15.9155 15.9155 0 1 1 0 -31.831"
+                />
+              </svg>
+              <div class="inner-circle">
+                <div class="inner-text">
+                  {{ caloriesLeft }}kCal<br>left
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Second Container: Water Intake Card -->
+    <div class="col-md-4">
+      <div class="card water-intake-card h-100">
+        <div class="water-intake-section">
+          <h5>Water Intake</h5>
+          <h6>{{ waterIntakePercentage.toFixed(0) }}%</h6>
+          <div class="progress-bar-container">
+            <div class="progress-bar" [style.width.%]="waterIntakePercentage"></div>
+          </div>
+          <div class="water-task-list">
+            <div
+              class="task-item"
+              *ngFor="let task of waterTasks"
+              (click)="toggleTaskCompletion(task)"
+            >
+              <span class="task-time">{{ task.time }}</span>
+              <span class="task-amount">{{ task.amount }}ml</span>
+              <span class="task-status">{{ task.completed ? '✓' : '-' }}</span>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <!-- Third Row: Workout Progress Card -->
+  <div class="row">
+    <div class="col-12">
+      <div class="card workout-card p-4">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h5 class="card-title mb-0">Progress</h5>
+          <!-- Dropdown button to toggle between Weekly and Monthly -->
+          <div class="dropdown">
+            <button
+              class="btn btn-outline-primary btn-sm dropdown-toggle"
+              type="button"
+              id="timeRangeDropdown"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              {{ isWeekly ? 'Weekly' : 'Monthly' }}
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="timeRangeDropdown">
+              <li><button class="dropdown-item" (click)="showWeekly()">Weekly</button></li>
+              <li><button class="dropdown-item" (click)="showMonthly()">Monthly</button></li>
+            </ul>
+          </div>
+        </div>
+        <div class="workout-graph-container">
+          <!-- Y-axis labels -->
+          <div class="y-axis-labels">
+            <div *ngFor="let label of [100, 80, 60, 40, 20, 0]" class="y-label">{{ label }}%</div>
+          </div>
+          <!-- Graph -->
+          <div class="workout-graph">
+            <!-- Weekly Chart -->
+            <svg *ngIf="isWeekly" width="100%" height="240px" viewBox="0 0 700 200" preserveAspectRatio="none">
+              <polyline
+                fill="none"
+                stroke="#2196f3"
+                stroke-width="2"
+                [attr.points]="getSvgPoints(workoutProgressWeekly)"
+              ></polyline>
+              <!-- Dynamic labels for days -->
+              <text *ngFor="let day of ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']; let i = index"
+                    [attr.x]="(i + 0.5) * (700 / 7)" [attr.y]="getXAxisY()" text-anchor="middle">
+                {{ day }}
+              </text>
+            </svg>
+            
+            <!-- Monthly Chart -->
+            <svg *ngIf="!isWeekly" width="100%" height="240px" viewBox="0 0 700 200" preserveAspectRatio="none">
+              <polyline
+                fill="none"
+                stroke="#2196f3"
+                stroke-width="2"
+                [attr.points]="getSvgPoints(workoutProgressMonthly)"
+              ></polyline>
+              <!-- Dynamic labels for weeks -->
+              <text *ngFor="let week of ['W1', 'W2', 'W3', 'W4']; let i = index"
+                    [attr.x]="(i + 0.5) * (700 / 4)" [attr.y]="getXAxisY()" text-anchor="middle">
+                {{ week }}
+              </text>
+            </svg>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+  
+  
+  
+</div>
+
+
+
+
+
+<div id="pdf-content" class="pdf-container" style="display: none;">
+  <div class="logo">
+    <img src="assets/logo.png" alt="Logo" style="height: 90px;" />
+  </div>
+  <div class="pdf-header">
+    <h4>Rapport de suivi de santé</h4>
+    <p>Date: {{ todayDate }}</p>
+  </div>
+
+  <div class="pdf-body">
+    <!-- User Information -->
+    <div class="user-info">
+      <p><strong>Full Name:</strong> {{ userName }}  {{ lastName }}</p>
+      <p><strong>Age:</strong> {{ age }} years old </p>
+      <p><strong>Gender:</strong> {{ gender }} </p>
+      <p><strong>Objectif:</strong> {{ objectif }}</p>
+    </div>
+    <div>
+      <div class="d-flex justify-content-around mt-5 m-auto">
+        <p><strong>Weight:</strong> {{ weight }} kg</p>
+        <p><strong>Height:</strong> {{ height }} m</p>
+      </div>
+      <p class="m-auto"><strong>BMI:</strong> {{ bmiValue }} : <b>{{ bmiStatus }}</b></p>
+      
+    </div>
+
+    <!-- Calories Information -->
+    <div class="calorie-info">
+      <h2 class="calorie-title">Moyenne de calories</h2>
+      <div class="calories">
+        <!-- Consommées -->
+        <div class="calorie-item">
+          <svg class="circular-progress" viewBox="0 0 36 36">
+            <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 1 1 0 31.831 a 15.9155 15.9155 0 1 1 0 -31.831" />
+            <path
+              id="consumedCircle" 
+              class="circle"
+              d="M18 2.0845 a 15.9155 15.9155 0 1 1 0 31.831 a 15.9155 15.9155 0 1 1 0 -31.831"
+            />
+            <text x="18" y="20.35" class="circle-text">{{ caloriesConsumed }}</text>
+          </svg>
+          <h3 class="calorie-value">{{ caloriesConsumed }} kCal</h3>
+          <p class="calorie-label">Consommées</p>
+        </div>
+    
+        <!-- Brûlées -->
+        <div class="calorie-item">
+          <svg class="circular-progress" viewBox="0 0 36 36">
+            <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 1 1 0 31.831 a 15.9155 15.9155 0 1 1 0 -31.831" />
+            <path
+              id="burnedCircle" 
+              class="circle"
+              d="M18 2.0845 a 15.9155 15.9155 0 1 1 0 31.831 a 15.9155 15.9155 0 1 1 0 -31.831"
+            />
+            <text x="18" y="20.35" class="circle-text">{{ caloriesBurned }}</text>
+          </svg>
+          <h3 class="calorie-value">{{ caloriesBurned }} kCal</h3>
+          <p class="calorie-label">Brûlées</p>
+        </div>
+      </div>
+    </div>
+    
+    
+
+
+    <!-- Workout Progress -->
+    <div class="progress-info">
+      <p class="m-auto" style="font-size: 17px; font-weight: 500;">Workout Progress (Weekly)</p>
+      <div class="svg-container-pdf">
+        <!-- Y-axis labels -->
+        <div class="y-axis-labels-pdf">
+          <div *ngFor="let label of [100, 80, 60, 40, 20, 0]" class="y-label-pdf">{{ label }}</div>
+        </div>
+        <!-- Monthly SVG Graph -->
+        <svg width="100%" height="240px" viewBox="0 0 700 200" preserveAspectRatio="none">
+          <polyline 
+            [attr.points]="getSvgPoints(workoutProgressMonthly)" 
+            stroke="#2196f3" 
+            fill="none" 
+            stroke-width="2">
+          </polyline>
+          <!-- X-axis labels -->
+          <text *ngFor="let week of ['W1', 'W2', 'W3', 'W4', 'W5']; let i = index" 
+          [attr.x]="(i + 0.5) * (700 / 4)" [attr.y]="getXAxisY()" text-anchor="middle">
+            {{ week }}
+          </text>
+        </svg>
+      </div>
+    </div>
+    
+    
+</div>

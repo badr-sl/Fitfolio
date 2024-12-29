@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DataInitializer.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">fitfolio</a> &gt; <a href="index.source.html" class="el_package">com.example.fitfolio.config</a> &gt; <span class="el_source">DataInitializer.java</span></div><h1>DataInitializer.java</h1><pre class="source lang-java linenums">package com.example.fitfolio.config;
+
+import java.util.List;
+
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import com.example.fitfolio.entities.Activite;
+import com.example.fitfolio.entities.Role;
+import com.example.fitfolio.entities.Utilisateur;
+import com.example.fitfolio.entities.Planning;
+import com.example.fitfolio.entities.Repas;
+import com.example.fitfolio.repo.ActiviteRepository;
+import com.example.fitfolio.repo.RoleRepository;
+import com.example.fitfolio.repo.UserRepository;
+import com.example.fitfolio.service.UserService;
+import com.example.fitfolio.repo.PlanningRepository;
+import com.example.fitfolio.repo.RepasRepository;
+
+@Configuration
+<span class="fc" id="L23">public class DataInitializer {</span>
+    @Bean
+    BCryptPasswordEncoder passwordEncoder() {
+<span class="fc" id="L26">	        return new BCryptPasswordEncoder(); // Password encoder              </span>
+	    }
+    @Bean
+    CommandLineRunner initData(UserRepository userRepository,
+    		RoleRepository roleRepository,
+    		RepasRepository repasRepository,
+    		ActiviteRepository activiteRepository,
+    		PlanningRepository planningRepository,UserService userService
+    		) {
+<span class="fc" id="L35">        return args -&gt; {</span>
+
+<span class="fc" id="L37">            Role adminRole = new Role(null, &quot;ADMIN&quot;);adminRole = roleRepository.save(adminRole);</span>
+<span class="fc" id="L38">            Role adminRole1 = new Role(null, &quot;SYSTEM&quot;);adminRole1 = roleRepository.save(adminRole1);</span>
+<span class="fc" id="L39">            Role adminRole2 = new Role(null, &quot;STOCK&quot;);adminRole2 = roleRepository.save(adminRole2);</span>
+<span class="fc" id="L40">            Role userRole = new Role(null, &quot;USERS&quot;);userRole = roleRepository.save(userRole);</span>
+<span class="fc" id="L41">            Utilisateur admin = new Utilisateur(null, &quot;admin&quot;, &quot;admin&quot;, List.of(adminRole, userRole),24);</span>
+<span class="fc" id="L42">            userService.addNewUser(admin);  	</span>
+<span class="fc" id="L43">            Utilisateur ali = new Utilisateur(null, &quot;ali&quot;,&quot;ali&quot;, List.of(userRole,adminRole1),21);</span>
+<span class="fc" id="L44">            	userService.addNewUser(ali);</span>
+<span class="fc" id="L45">            	Utilisateur mekiani = new Utilisateur(null, &quot;mekiani&quot;, &quot;mekiani&quot;, List.of(userRole,adminRole1),22);</span>
+<span class="fc" id="L46">            	userService.addNewUser(mekiani);</span>
+<span class="fc" id="L47">				Utilisateur leila = new Utilisateur(null,&quot;leila&quot;, &quot;mekiani&quot;,List.of(userRole,adminRole1),22);</span>
+<span class="fc" id="L48">				userService.addNewUser(leila);</span>
+<span class="fc" id="L49">			Utilisateur utilisateur = new Utilisateur(</span>
+					&quot;2024-12-15&quot;,
+					null,
+					&quot;oumaima&quot;,
+					&quot;oumaima&quot;,
+<span class="fc" id="L54">					List.of(userRole, adminRole2),</span>
+					&quot;Leila&quot;,
+					&quot;leila@gmail.com&quot;,
+					&quot;mekiani&quot;,
+					&quot;0661248878&quot;,
+					24,
+<span class="fc" id="L60">					64.00,</span>
+<span class="fc" id="L61">					160.0,</span>
+					&quot;Feminin&quot;,
+					&quot;PERTE DE POIDS&quot;,
+<span class="fc" id="L64">					List.of()</span>
+			);
+
+
+<span class="fc" id="L68">			userService.addNewUser(utilisateur);</span>
+<span class="fc" id="L69">            	Repas dejeuner = new Repas(null, &quot;Déjeuner équilibré&quot;, &quot;Riche en protéines.&quot;, &quot;Petit-déjeuner&quot;, 300.0, &quot;Matin&quot;, &quot;PERTEPOID&quot;, &quot;image-petit-dejeuner.jpg&quot;);</span>
+<span class="fc" id="L70">            	Repas diner =new Repas(null, &quot;Diner diététique&quot;, &quot;Poulet grillé avec légumes.&quot;, &quot;Déjeuner&quot;, 500.0, &quot;Midi&quot;, &quot;MAINTIEN&quot;, &quot;image-dejeuner.jpg&quot;);	</span>
+<span class="fc" id="L71">            	repasRepository.save(dejeuner);</span>
+<span class="fc" id="L72">            	repasRepository.save(diner);</span>
+            	
+<span class="fc" id="L74">            	Repas petitDejeuner = new Repas(</span>
+            		    null,
+            		    &quot;Petit Déjeuner&quot;,
+            		    &quot;Un repas équilibré avec des œufs et du pain complet.&quot;,
+            		    &quot;Petit Déjeuner&quot;,
+<span class="fc" id="L79">            		    350.0,</span>
+            		    &quot;Matin&quot;,
+            		    &quot;PERTEPOID&quot;,
+            		    &quot;image_url.jpg&quot;
+            		);
+<span class="fc" id="L84">            	repasRepository.save(petitDejeuner);</span>
+            	
+<span class="fc" id="L86">            	Activite courseapied = new Activite(</span>
+            		    null,
+            		    &quot;Course à pied&quot;,
+            		    &quot;Une activité physique pour brûler des calories.&quot;,
+            		    &quot;Sport&quot;,
+<span class="fc" id="L91">            		    400.0,</span>
+            		    &quot;Cardio&quot;,
+            		    &quot;PERTEPOID&quot;,
+            		    &quot;image-course.jpg&quot;,
+<span class="fc" id="L95">						100.00,</span>
+						&quot;speed&quot;
+
+            		);
+<span class="fc" id="L99">            	activiteRepository.save(courseapied);</span>
+<span class="fc" id="L100">            		Activite relaxation = new Activite(</span>
+            		    null,
+            		    &quot;Yoga&quot;,
+            		    &quot;Exercice de relaxation et de souplesse.&quot;,
+            		    &quot;Bien-être&quot;,
+<span class="fc" id="L105">            		    200.0,</span>
+            		    &quot;Relaxation&quot;,
+            		    &quot;MAINTIEN&quot;,
+            		    &quot;image-yoga.jpg&quot;,
+<span class="fc" id="L109">						100.00,</span>
+						&quot;speed&quot;
+            		);
+<span class="fc" id="L112">            		activiteRepository.save(relaxation);</span>
+            		
+            		
+<span class="fc" id="L115">            		Planning lundi = new Planning(</span>
+            		    null,
+            		    &quot;PL123&quot;,
+            		    &quot;2024-12-15&quot;,
+<span class="fc" id="L119">            		    List.of(</span>
+            		        dejeuner,
+            		        diner
+            		    ),
+<span class="fc" id="L123">            		    List.of(</span>
+            		        courseapied,
+            		        relaxation
+            		    ),utilisateur
+						
+            		);
+<span class="fc" id="L129">					Planning mardi= new Planning(</span>
+            		    null,
+            		    &quot;PL124&quot;,
+            		    &quot;2024-12-14&quot;,
+<span class="fc" id="L133">            		    List.of(</span>
+            		        dejeuner,
+            		        diner
+            		    ),
+<span class="fc" id="L137">            		    List.of(</span>
+            		        courseapied,
+            		        relaxation
+            		    ),utilisateur
+						
+            		);
+            		
+<span class="fc" id="L144">            		planningRepository.save(lundi);</span>
+<span class="fc" id="L145">					planningRepository.save(mardi);</span>
+
+
+            		
+            		
+<span class="fc" id="L150">            System.out.println(&quot;Initialisation des données terminée. admin ali et mekiani&quot;);</span>
+            
+<span class="fc" id="L152">        };</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

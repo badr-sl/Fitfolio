@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Utilisateur.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">fitfolio</a> &gt; <a href="index.source.html" class="el_package">com.example.fitfolio.entities</a> &gt; <span class="el_source">Utilisateur.java</span></div><h1>Utilisateur.java</h1><pre class="source lang-java linenums">package com.example.fitfolio.entities;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Objects;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
+
+@Entity
+public class Utilisateur {
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String username;
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private String password;
+<span class="fc" id="L23">    @ManyToMany(fetch = FetchType.EAGER)</span>
+    private Collection&lt;Role&gt; roles = new ArrayList&lt;&gt;();
+    private String prenom;
+
+    private String email;
+
+	private String date;
+
+	public String getDate() {
+<span class="fc" id="L32">		return date;</span>
+	}
+
+	public void setDate(String date) {
+<span class="fc" id="L36">		this.date = date;</span>
+<span class="fc" id="L37">	}</span>
+
+	public String getNom() {
+<span class="fc" id="L40">		return nom;</span>
+	}
+
+	public void setNom(String nom) {
+<span class="fc" id="L44">		this.nom = nom;</span>
+<span class="fc" id="L45">	}</span>
+
+	private String nom;
+
+    private String telephone;
+
+    private int age;
+
+	private Double poids;
+
+	private Double taille;
+
+	private String sexe;
+
+	private String objectif;
+
+
+	public String getPrenom() {
+<span class="fc" id="L63">		return prenom;</span>
+	}
+	public void setPrenom(String prenom) {
+<span class="fc" id="L66">		this.prenom = prenom;</span>
+<span class="fc" id="L67">	}</span>
+	public String getEmail() {
+<span class="fc" id="L69">		return email;</span>
+	}
+	public void setEmail(String email) {
+<span class="fc" id="L72">		this.email = email;</span>
+<span class="fc" id="L73">	}</span>
+	public String getTelephone() {
+<span class="fc" id="L75">		return telephone;</span>
+	}
+	public void setTelephone(String telephone) {
+<span class="fc" id="L78">		this.telephone = telephone;</span>
+<span class="fc" id="L79">	}</span>
+	public int getAge() {
+<span class="fc" id="L81">		return age;</span>
+	}
+	public void setAge(int age) {
+<span class="fc" id="L84">		this.age = age;</span>
+<span class="fc" id="L85">	}</span>
+	public Double getPoids() {
+<span class="fc" id="L87">		return poids;</span>
+	}
+	public void setPoids(Double poids) {
+<span class="fc" id="L90">		this.poids = poids;</span>
+<span class="fc" id="L91">	}</span>
+	public Double getTaille() {
+<span class="fc" id="L93">		return taille;</span>
+	}
+	public void setTaille(Double taille) {
+<span class="fc" id="L96">		this.taille = taille;</span>
+<span class="fc" id="L97">	}</span>
+	public String getSexe() {
+<span class="fc" id="L99">		return sexe;</span>
+	}
+	public void setSexe(String sexe) {
+<span class="fc" id="L102">		this.sexe = sexe;</span>
+<span class="fc" id="L103">	}</span>
+	public String getObjectif() {
+<span class="fc" id="L105">		return objectif;</span>
+	}
+	public void setObjectif(String objectif) {
+<span class="fc" id="L108">		this.objectif = objectif;</span>
+<span class="fc" id="L109">	}</span>
+	public Collection&lt;Planning&gt; getPlannings() {
+<span class="fc" id="L111">		return plannings;</span>
+	}
+	public void setPlannings(Collection&lt;Planning&gt; plannings) {
+<span class="fc" id="L114">		this.plannings = plannings;</span>
+<span class="fc" id="L115">	}</span>
+
+
+<span class="fc" id="L118">@ManyToMany(fetch = FetchType.EAGER)</span>
+private Collection&lt;Planning&gt; plannings = new ArrayList&lt;&gt;();
+
+	public Long getId() {
+<span class="fc" id="L122">		return id;</span>
+	}
+	public void setId(Long id) {
+<span class="fc" id="L125">		this.id = id;</span>
+<span class="fc" id="L126">	}</span>
+	public String getUsername() {
+<span class="fc" id="L128">		return username;</span>
+	}
+	public void setUsername(String username) {
+<span class="fc" id="L131">		this.username = username;</span>
+<span class="fc" id="L132">	}</span>
+	public String getPassword() {
+<span class="fc" id="L134">		return password;</span>
+	}
+	public void setPassword(String password) {
+<span class="fc" id="L137">		this.password = password;</span>
+<span class="fc" id="L138">	}</span>
+	public Collection&lt;Role&gt; getRoles() {
+<span class="fc" id="L140">		return roles;</span>
+	}
+	public void setRoles(Collection&lt;Role&gt; roles) {
+<span class="fc" id="L143">		this.roles = roles;</span>
+<span class="fc" id="L144">	}</span>
+
+
+<span class="fc" id="L147">	public Utilisateur(String date, Long id, String username, String password, Collection&lt;Role&gt; roles, String prenom, String email, String nom, String telephone, int age, Double poids, Double taille, String sexe, String objectif, Collection&lt;Planning&gt; plannings) {</span>
+<span class="fc" id="L148">		this.date = date;</span>
+<span class="fc" id="L149">		this.id = id;</span>
+<span class="fc" id="L150">		this.username = username;</span>
+<span class="fc" id="L151">		this.password = password;</span>
+<span class="fc" id="L152">		this.roles = roles;</span>
+<span class="fc" id="L153">		this.prenom = prenom;</span>
+<span class="fc" id="L154">		this.email = email;</span>
+<span class="fc" id="L155">		this.nom = nom;</span>
+<span class="fc" id="L156">		this.telephone = telephone;</span>
+<span class="fc" id="L157">		this.age = age;</span>
+<span class="fc" id="L158">		this.poids = poids;</span>
+<span class="fc" id="L159">		this.taille = taille;</span>
+<span class="fc" id="L160">		this.sexe = sexe;</span>
+<span class="fc" id="L161">		this.objectif = objectif;</span>
+<span class="fc" id="L162">		this.plannings = plannings;</span>
+<span class="fc" id="L163">	}</span>
+
+	public Utilisateur(Long id, String username, String password, Collection&lt;Role&gt; roles, int age) {
+<span class="fc" id="L166">		super();</span>
+<span class="fc" id="L167">		this.id = id;</span>
+<span class="fc" id="L168">		this.username = username;</span>
+<span class="fc" id="L169">		this.password = password;</span>
+<span class="fc" id="L170">		this.roles = roles;</span>
+<span class="fc" id="L171">		this.age = age;</span>
+<span class="fc" id="L172">	}</span>
+<span class="fc" id="L173">	public Utilisateur() {</span>
+		
+<span class="fc" id="L175">	}</span>
+	@Override
+	public String toString() {
+<span class="fc" id="L178">		return &quot;Utilisateur{&quot; +</span>
+				&quot;id=&quot; + id +
+				&quot;, username='&quot; + username + '\'' +
+				&quot;, prenom='&quot; + prenom + '\'' +
+				&quot;, email='&quot; + email + '\'' +
+				&quot;, date='&quot; + date + '\'' +
+				&quot;, nom='&quot; + nom + '\'' +
+				&quot;, telephone='&quot; + telephone + '\'' +
+				&quot;, age=&quot; + age +
+				&quot;, poids=&quot; + poids +
+				&quot;, taille=&quot; + taille +
+				&quot;, sexe='&quot; + sexe + '\'' +
+				&quot;, objectif='&quot; + objectif + '\'' +
+				&quot;, roles=&quot; + roles +
+				&quot;, plannings=&quot; + plannings +
+				'}';
+	}
+
+
+
+	@Override
+	public int hashCode() {
+<span class="nc" id="L200">		return Objects.hash(id, username, password, roles, prenom, email, date, nom, telephone, age, poids, taille, sexe, objectif, plannings);</span>
+	}
+	
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

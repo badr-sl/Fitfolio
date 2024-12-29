@@ -1,0 +1,9 @@
+com.example.fitfolio.service.PlanningService#fetchActivitiesByUtilisateur(Ljava/lang/Long;)Ljava/util/List;
+false
+912fb2a86322e00b7c369a22a295fd5c
+java.util.stream.Collectors#toList()Ljava/util/stream/Collector;
+==
+collect java.util.stream.Stream#collect(Ljava/util/stream/Collector;)Ljava/lang/Object;
+findActivitiesByUtilisateurOrderedByPaIdDesc com.example.fitfolio.repo.PlanningRepository#findActivitiesByUtilisateurOrderedByPaIdDesc(Ljava/lang/Long;)Ljava/util/List;
+map java.util.stream.Stream#map(Ljava/util/function/Function;)Ljava/util/stream/Stream;
+stream java.util.Collection#stream()Ljava/util/stream/Stream;

@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PlanningService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">fitfolio</a> &gt; <a href="index.source.html" class="el_package">com.example.fitfolio.service</a> &gt; <span class="el_source">PlanningService.java</span></div><h1>PlanningService.java</h1><pre class="source lang-java linenums">package com.example.fitfolio.service;
+
+
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.temporal.ChronoField;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+import com.example.fitfolio.dto.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.example.fitfolio.dto.PlanningDto;
+import com.example.fitfolio.entities.Activite;
+import com.example.fitfolio.entities.Planning;
+import com.example.fitfolio.entities.Repas;
+import com.example.fitfolio.entities.Utilisateur;
+import com.example.fitfolio.repo.ActiviteRepository;
+import com.example.fitfolio.repo.PlanningRepository;
+import com.example.fitfolio.repo.UserRepository;
+
+
+@Service
+@Transactional
+<span class="fc" id="L31">public class PlanningService {</span>
+
+    @Autowired
+    private PlanningRepository PlanningRepository;
+    @Autowired
+    private UserRepository UserRepository;
+    @Autowired
+    private ActiviteRepository ActiviteRepository;
+
+
+    public ResponseEntity&lt;PlanningDto&gt; addNewPlanning(Planning planning) {
+<span class="fc" id="L42">        Planning existingPlanning = PlanningRepository.findByJour(planning.getJour());</span>
+<span class="fc" id="L43">        PlanningDto PlanningDto = new PlanningDto();</span>
+<span class="fc bfc" id="L44" title="All 2 branches covered.">        if (existingPlanning != null) {</span>
+
+<span class="fc" id="L46">            planning.setId(existingPlanning.getId());</span>
+<span class="fc" id="L47">            PlanningDto.setPlanning(PlanningRepository.save(planning));</span>
+
+<span class="fc" id="L49">            PlanningDto.setMessage(&quot;Modification effectuer&quot;);</span>
+<span class="fc" id="L50">            PlanningDto.setPlanning(planning);</span>
+
+<span class="fc" id="L52">            return new ResponseEntity&lt;&gt;(PlanningDto, HttpStatus.OK);</span>
+        }
+
+<span class="fc" id="L55">        PlanningDto.setPlanning(PlanningRepository.save(planning));</span>
+<span class="fc" id="L56">        PlanningDto.setMessage(&quot;Creation Effectuer &quot;);</span>
+<span class="fc" id="L57">        return new ResponseEntity&lt;&gt;(PlanningDto, HttpStatus.CREATED);</span>
+    }
+
+    public Planning FindPlanningByJour(String jour) {
+<span class="fc" id="L61">        return PlanningRepository.findByJour(jour);</span>
+    }
+
+
+    public List&lt;Planning&gt; listPlanning() {
+<span class="fc" id="L66">        return PlanningRepository.findAll();</span>
+    }
+
+
+    public ResponseEntity&lt;String&gt; deletePlanning(Long id) {
+<span class="fc bfc" id="L71" title="All 2 branches covered.">        if (PlanningRepository.existsById(id)) {</span>
+<span class="fc" id="L72">            PlanningRepository.deleteById(id); //</span>
+<span class="fc" id="L73">            return new ResponseEntity&lt;&gt;(&quot;Planning supprimé avec succès&quot;, HttpStatus.OK);</span>
+        } else {
+<span class="fc" id="L75">            return new ResponseEntity&lt;&gt;(&quot;Planning introuvable&quot;, HttpStatus.NOT_FOUND);</span>
+        }
+    }
+
+
+    public ResponseEntity&lt;PlanningDto&gt; addRepasToPlanning(String jour, Long utilisateurId, List&lt;Repas&gt; repasList) {
+        // Trouver l'utilisateur
+<span class="fc" id="L82">        Utilisateur utilisateur = UserRepository.findById(utilisateurId).orElse(null);</span>
+<span class="fc bfc" id="L83" title="All 2 branches covered.">        if (utilisateur == null) {</span>
+<span class="fc" id="L84">            System.out.println(&quot;Utilisateur non trouvé&quot;);</span>
+<span class="fc" id="L85">            PlanningDto errorDto = new PlanningDto();</span>
+<span class="fc" id="L86">            errorDto.setMessage(&quot;Utilisateur non trouvé&quot;);</span>
+<span class="fc" id="L87">            return new ResponseEntity&lt;&gt;(errorDto, HttpStatus.NOT_FOUND);</span>
+        }
+
+        // Vérifier si un planning existe déjà pour cet utilisateur à cette date
+<span class="fc" id="L91">        Optional&lt;Planning&gt; optionalPlanning = PlanningRepository.findByJourAndUtilisateur(jour, utilisateur);</span>
+
+        Planning planning;
+
+<span class="pc bpc" id="L95" title="1 of 2 branches missed.">        if (optionalPlanning.isEmpty()) {</span>
+            // Si aucun planning n'existe, créer un nouveau planning
+<span class="fc" id="L97">            System.out.println(&quot;Planning non trouvé pour l'utilisateur à cette date, création d'un nouveau planning&quot;);</span>
+
+<span class="fc" id="L99">            planning = new Planning();</span>
+<span class="fc" id="L100">            planning.setJour(jour);</span>
+<span class="fc" id="L101">            planning.setUtilisateur(utilisateur);</span>
+<span class="fc" id="L102">            planning.setRepass(new ArrayList&lt;&gt;(repasList)); // Initialiser avec les repas ajoutés</span>
+<span class="fc" id="L103">            planning.setActivites(new ArrayList&lt;&gt;());</span>
+<span class="fc" id="L104">            planning.setCode(&quot;J&quot; + jour + &quot;U&quot; + utilisateurId); // Génération d'un code unique</span>
+
+            // Sauvegarder le nouveau planning
+<span class="fc" id="L107">            planning = PlanningRepository.save(planning);</span>
+        } else {
+            // Si le planning existe déjà, remplacer les repas existants
+<span class="nc" id="L110">            System.out.println(&quot;Planning trouvé, remplacement des repas pour la journée&quot;);</span>
+
+<span class="nc" id="L112">            planning = optionalPlanning.get();</span>
+
+            // Supprimer les anciens repas et remplacer par les nouveaux
+<span class="nc" id="L115">            planning.getRepass().clear(); // Supprimer tous les anciens repas</span>
+<span class="nc" id="L116">            planning.setRepass(new ArrayList&lt;&gt;(repasList)); // Ajouter les nouveaux repas</span>
+
+            // Sauvegarder le planning mis à jour
+<span class="nc" id="L119">            planning = PlanningRepository.save(planning);</span>
+        }
+
+        // Retourner une réponse avec le planning
+<span class="fc" id="L123">        PlanningDto planningDto = new PlanningDto();</span>
+<span class="fc" id="L124">        planningDto.setPlanning(planning);</span>
+<span class="fc" id="L125">        planningDto.setMessage(&quot;Repas remplacés dans le planning avec succès&quot;);</span>
+
+<span class="fc" id="L127">        return new ResponseEntity&lt;&gt;(planningDto, HttpStatus.OK);</span>
+    }
+
+    public ResponseEntity&lt;PlanningDto&gt; addActivitesToPlanning(String jour, Long utilisateurId, List&lt;Activite&gt; activiteList) {
+
+<span class="fc" id="L132">        Utilisateur utilisateur = UserRepository.findById(utilisateurId).orElse(null);</span>
+<span class="pc bpc" id="L133" title="1 of 2 branches missed.">        if (utilisateur == null) {</span>
+<span class="nc" id="L134">            PlanningDto errorDto = new PlanningDto();</span>
+<span class="nc" id="L135">            errorDto.setMessage(&quot;Utilisateur non trouvé&quot;);</span>
+<span class="nc" id="L136">            return new ResponseEntity&lt;&gt;(errorDto, HttpStatus.NOT_FOUND);</span>
+        }
+
+
+<span class="fc" id="L140">        Optional&lt;Planning&gt; optionalPlanning = PlanningRepository.findByJourAndUtilisateur(jour, utilisateur);</span>
+
+        Planning planning;
+<span class="pc bpc" id="L143" title="1 of 2 branches missed.">        if (optionalPlanning.isEmpty()) {</span>
+            // Create a new planning if it doesn't exist
+<span class="fc" id="L145">            planning = new Planning();</span>
+<span class="fc" id="L146">            planning.setJour(jour);</span>
+<span class="fc" id="L147">            planning.setUtilisateur(utilisateur);</span>
+<span class="fc" id="L148">            planning.setRepass(new ArrayList&lt;&gt;());</span>
+<span class="fc" id="L149">            planning.setActivites(new ArrayList&lt;&gt;());</span>
+<span class="fc" id="L150">            planning.setCode(&quot;J&quot; + jour + &quot;U&quot; + utilisateurId); // You can customize the code generation</span>
+
+            // Save the new planning
+<span class="fc" id="L153">            planning = PlanningRepository.save(planning);</span>
+        } else {
+            // Retrieve the existing planning
+<span class="nc" id="L156">            planning = optionalPlanning.get();</span>
+        }
+
+        // Validate and retrieve each Activite in the activiteList
+<span class="fc" id="L160">        List&lt;Activite&gt; validActiviteList = new ArrayList&lt;&gt;();</span>
+<span class="pc bpc" id="L161" title="1 of 2 branches missed.">        for (Activite activite : activiteList) {</span>
+<span class="fc" id="L162">            Optional&lt;Activite&gt; optionalActivite = ActiviteRepository.findById(activite.getId());</span>
+<span class="pc bpc" id="L163" title="1 of 2 branches missed.">            if (optionalActivite.isPresent()) {</span>
+<span class="nc" id="L164">                validActiviteList.add(optionalActivite.get());</span>
+            } else {
+<span class="fc" id="L166">                PlanningDto errorDto = new PlanningDto();</span>
+<span class="fc" id="L167">                errorDto.setMessage(&quot;Activite with ID &quot; + activite.getId() + &quot; not found&quot;);</span>
+<span class="fc" id="L168">                return new ResponseEntity&lt;&gt;(errorDto, HttpStatus.NOT_FOUND);</span>
+            }
+<span class="nc" id="L170">        }</span>
+
+        // Add valid activities to the planning
+<span class="nc" id="L173">        planning.getActivites().addAll(validActiviteList);</span>
+
+        // Save the updated planning
+<span class="nc" id="L176">        PlanningRepository.save(planning);</span>
+
+        // Create and return the DTO with a success message
+<span class="nc" id="L179">        PlanningDto planningDto = new PlanningDto();</span>
+<span class="nc" id="L180">        planningDto.setPlanning(planning);</span>
+<span class="nc" id="L181">        planningDto.setMessage(&quot;Activités ajoutées au planning avec succès&quot;);</span>
+
+<span class="nc" id="L183">        return new ResponseEntity&lt;&gt;(planningDto, HttpStatus.OK);</span>
+    }
+
+    public ResponseEntity&lt;List&lt;Activite&gt;&gt; fetchActivitesByJourAndUtilisateur(String jour, Long utilisateurId) {
+        // Find the user
+<span class="fc" id="L188">        Utilisateur utilisateur = UserRepository.findById(utilisateurId).orElse(null);</span>
+
+<span class="fc bfc" id="L190" title="All 2 branches covered.">        if (utilisateur == null) {</span>
+<span class="fc" id="L191">            return new ResponseEntity&lt;&gt;(HttpStatus.NOT_FOUND);</span>
+        }
+
+        // Fetch the planning
+<span class="fc" id="L195">        Optional&lt;Planning&gt; optionalPlanning = PlanningRepository.findByJourAndUtilisateur(jour, utilisateur);</span>
+
+<span class="fc bfc" id="L197" title="All 2 branches covered.">        if (optionalPlanning.isEmpty()) {</span>
+<span class="fc" id="L198">            return new ResponseEntity&lt;&gt;(HttpStatus.NOT_FOUND);</span>
+        }
+
+        // Extract activities
+<span class="fc" id="L202">        Planning planning = optionalPlanning.get();</span>
+<span class="fc" id="L203">        List&lt;Activite&gt; activites = new ArrayList&lt;&gt;(planning.getActivites());</span>
+
+<span class="fc" id="L205">        return new ResponseEntity&lt;&gt;(activites, HttpStatus.OK);</span>
+    }
+
+
+    public ResponseEntity&lt;List&lt;Repas&gt;&gt; fetchRepasByJourAndUtilisateur(String jour, Long utilisateurId) {
+<span class="fc" id="L210">        Utilisateur utilisateur = UserRepository.findById(utilisateurId).orElse(null);</span>
+<span class="fc bfc" id="L211" title="All 2 branches covered.">        if (utilisateur == null) {</span>
+<span class="fc" id="L212">            return new ResponseEntity&lt;&gt;(HttpStatus.NOT_FOUND);</span>
+        }
+<span class="fc" id="L214">        Optional&lt;Planning&gt; optionalPlanning = PlanningRepository.findByJourAndUtilisateur(jour, utilisateur);</span>
+<span class="fc bfc" id="L215" title="All 2 branches covered.">        if (optionalPlanning.isEmpty()) {</span>
+<span class="fc" id="L216">            return new ResponseEntity&lt;&gt;(HttpStatus.NOT_FOUND);</span>
+        }
+<span class="fc" id="L218">        Planning planning = optionalPlanning.get();</span>
+<span class="fc" id="L219">        List&lt;Repas&gt; repas = new ArrayList&lt;&gt;(planning.getRepass());</span>
+<span class="fc" id="L220">        return new ResponseEntity&lt;&gt;(repas, HttpStatus.OK);</span>
+    }
+
+    public ResponseEntity&lt;List&lt;Activite&gt;&gt; fetchWeeklyActivities(Long utilisateurId, String currentDate) {
+<span class="fc" id="L224">        Utilisateur utilisateur = UserRepository.findById(utilisateurId).orElse(null);</span>
+
+<span class="pc bpc" id="L226" title="1 of 2 branches missed.">        if (utilisateur == null) {</span>
+<span class="nc" id="L227">            return new ResponseEntity&lt;&gt;(HttpStatus.NOT_FOUND);</span>
+        }
+<span class="fc" id="L229">        LocalDate current = LocalDate.parse(currentDate);</span>
+<span class="fc" id="L230">        LocalDate startOfWeek = current.with(ChronoField.DAY_OF_WEEK, 1);</span>
+<span class="fc" id="L231">        LocalDate endOfWeek = startOfWeek.plusDays(6);</span>
+<span class="fc" id="L232">        String startOfWeekStr = startOfWeek.toString();</span>
+<span class="fc" id="L233">        String endOfWeekStr = endOfWeek.toString();</span>
+<span class="fc" id="L234">        List&lt;Planning&gt; weeklyPlannings = PlanningRepository.findByUtilisateurAndJourBetween(utilisateur, startOfWeekStr, endOfWeekStr);</span>
+<span class="fc" id="L235">        List&lt;Activite&gt; weeklyActivities = new ArrayList&lt;&gt;();</span>
+<span class="fc bfc" id="L236" title="All 2 branches covered.">        for (Planning planning : weeklyPlannings) {</span>
+<span class="fc" id="L237">            weeklyActivities.addAll(planning.getActivites());</span>
+<span class="fc" id="L238">        }</span>
+<span class="fc" id="L239">        return new ResponseEntity&lt;&gt;(weeklyActivities, HttpStatus.OK);</span>
+    }
+
+    public ResponseEntity&lt;Double&gt; calculateDailyCalories(Long utilisateurId, String jour) {
+
+<span class="fc" id="L244">        Utilisateur utilisateur = UserRepository.findById(utilisateurId).orElse(null);</span>
+<span class="pc bpc" id="L245" title="1 of 2 branches missed.">        if (utilisateur == null) {</span>
+<span class="nc" id="L246">            System.out.println(&quot;User not found&quot;);</span>
+<span class="nc" id="L247">            return new ResponseEntity&lt;&gt;(HttpStatus.NOT_FOUND);</span>
+        }
+<span class="fc" id="L249">        Optional&lt;Planning&gt; optionalPlanning = PlanningRepository.findByJourAndUtilisateur(jour, utilisateur);</span>
+<span class="pc bpc" id="L250" title="1 of 2 branches missed.">        if (optionalPlanning.isEmpty()) {</span>
+<span class="nc" id="L251">            System.out.println(&quot;Planning not found&quot;);</span>
+<span class="nc" id="L252">            return new ResponseEntity&lt;&gt;(HttpStatus.NOT_FOUND);</span>
+        }
+<span class="fc" id="L254">        Planning planning = optionalPlanning.get();</span>
+<span class="fc" id="L255">        System.out.println(&quot;Number of Repas: &quot; + planning.getRepass().size());</span>
+<span class="fc" id="L256">        System.out.println(&quot;Number of Activites: &quot; + planning.getActivites().size());</span>
+<span class="fc" id="L257">        double totalCaloriesFromRepas = planning.getRepass()</span>
+<span class="fc" id="L258">                .stream()</span>
+<span class="pc bpc" id="L259" title="1 of 2 branches missed.">                .filter(repas -&gt; repas.getNbrcalories() != null)</span>
+<span class="fc" id="L260">                .mapToDouble(Repas::getNbrcalories)</span>
+<span class="fc" id="L261">                .sum();</span>
+
+
+<span class="fc" id="L264">        double totalCaloriesBurned = planning.getActivites()</span>
+<span class="fc" id="L265">                .stream()</span>
+<span class="pc bpc" id="L266" title="1 of 2 branches missed.">                .filter(activite -&gt; activite.getNbrcalories() != null)</span>
+<span class="fc" id="L267">                .mapToDouble(Activite::getNbrcalories)</span>
+<span class="fc" id="L268">                .sum();</span>
+<span class="fc" id="L269">        double netCalories = totalCaloriesFromRepas - totalCaloriesBurned;</span>
+<span class="fc" id="L270">        System.out.println(&quot;Total calories from Repas: &quot; + totalCaloriesFromRepas);</span>
+<span class="fc" id="L271">        System.out.println(&quot;Total calories burned by Activities: &quot; + totalCaloriesBurned);</span>
+<span class="fc" id="L272">        System.out.println(&quot;Net Calories: &quot; + netCalories);</span>
+<span class="fc" id="L273">        return new ResponseEntity&lt;&gt;(netCalories, HttpStatus.OK);</span>
+    }
+
+    public ResponseEntity&lt;List&lt;Repas&gt;&gt; fetchWeeklyRepas(Long utilisateurId, String startDate, int weekNumber, Optional&lt;String&gt; day) {
+
+<span class="fc" id="L278">        Utilisateur utilisateur = UserRepository.findById(utilisateurId).orElse(null);</span>
+<span class="fc bfc" id="L279" title="All 2 branches covered.">        if (utilisateur == null) {</span>
+<span class="fc" id="L280">            return new ResponseEntity&lt;&gt;(HttpStatus.NOT_FOUND);</span>
+        }
+<span class="fc" id="L282">        LocalDate registrationStartDate = LocalDate.parse(startDate);</span>
+<span class="fc" id="L283">        LocalDate weekStartDate = registrationStartDate.plusWeeks(weekNumber - 1);</span>
+<span class="fc" id="L284">        LocalDate weekEndDate = weekStartDate.plusDays(6);</span>
+
+
+<span class="pc bpc" id="L287" title="1 of 2 branches missed.">        if (day.isPresent()) {</span>
+            try {
+<span class="nc" id="L289">                DayOfWeek desiredDay = DayOfWeek.valueOf(day.get().toUpperCase());</span>
+<span class="nc" id="L290">                weekStartDate = weekStartDate.with(desiredDay);</span>
+<span class="nc" id="L291">                weekEndDate = weekStartDate;</span>
+<span class="fc" id="L292">            } catch (IllegalArgumentException e) {</span>
+<span class="fc" id="L293">                return new ResponseEntity&lt;&gt;(HttpStatus.BAD_REQUEST);</span>
+<span class="nc" id="L294">            }</span>
+        }
+<span class="nc" id="L296">        List&lt;Planning&gt; weeklyPlannings = PlanningRepository.findByUtilisateurAndJourBetween(</span>
+                utilisateur,
+<span class="nc" id="L298">                weekStartDate.toString(),</span>
+<span class="nc" id="L299">                weekEndDate.toString()</span>
+        );
+<span class="nc" id="L301">        List&lt;Repas&gt; weeklyRepas = weeklyPlannings.stream()</span>
+<span class="nc" id="L302">                .flatMap(planning -&gt; planning.getRepass().stream())</span>
+<span class="nc" id="L303">                .collect(Collectors.toList());</span>
+<span class="nc" id="L304">        return new ResponseEntity&lt;&gt;(weeklyRepas, HttpStatus.OK);</span>
+    }
+
+
+    public List&lt;Planning&gt; findPlanningsByUserId(Long utilisateurId) {
+<span class="fc" id="L309">        return PlanningRepository.findByUtilisateurId(utilisateurId);</span>
+    }
+
+    public List&lt;ActiviteDTO1&gt; fetchActivitiesByUtilisateur(Long utilisateurId) {
+<span class="fc" id="L313">        List&lt;Object[]&gt; results = PlanningRepository.findActivitiesByUtilisateurOrderedByPaIdDesc(utilisateurId);</span>
+
+<span class="fc" id="L315">        return results.stream()</span>
+<span class="fc" id="L316">                .map(result -&gt; new ActiviteDTO1(</span>
+<span class="pc bpc" id="L317" title="1 of 2 branches missed.">                        result[0] instanceof Number ? ((Number) result[0]).longValue() : null, // ID</span>
+<span class="pc bpc" id="L318" title="1 of 2 branches missed.">                        result[1] != null ? result[1].toString() : null,                     // Titre</span>
+<span class="pc bpc" id="L319" title="1 of 2 branches missed.">                        result[2] != null ? result[2].toString() : null,                     // Description</span>
+<span class="pc bpc" id="L320" title="1 of 2 branches missed.">                        result[3] != null ? result[3].toString() : null,                     // Categorie</span>
+<span class="pc bpc" id="L321" title="1 of 2 branches missed.">                        result[4] instanceof Number ? ((Number) result[4]).doubleValue() : null, // NbrCalories</span>
+<span class="pc bpc" id="L322" title="1 of 2 branches missed.">                        result[5] != null ? result[5].toString() : null,                     // TypeActivite</span>
+<span class="pc bpc" id="L323" title="1 of 2 branches missed.">                        result[6] != null ? result[6].toString() : null,                     // Objectif</span>
+<span class="pc bpc" id="L324" title="1 of 2 branches missed.">                        result[7] != null ? result[7].toString() : null,                     // Image</span>
+<span class="pc bpc" id="L325" title="1 of 2 branches missed.">                        result[8] instanceof Number ? ((Number) result[8]).doubleValue() : null, // PointCardio</span>
+<span class="pc bpc" id="L326" title="1 of 2 branches missed.">                        result[9] != null ? result[9].toString() : null                      // Speed</span>
+                ))
+<span class="fc" id="L328">                .collect(Collectors.toList());</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

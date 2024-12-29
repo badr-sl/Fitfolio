@@ -1,0 +1,7 @@
+com.example.fitfolio.service.UserService#addNewRole(Lcom/example/fitfolio/entities/Role;)Lcom/example/fitfolio/entities/Role;
+false
+76054dd62cca430e5ed44d45db0003f1
+==
+!unknownMethod! !unknownMethod!
+findByRoleName com.example.fitfolio.repo.RoleRepository#findByRoleName(Ljava/lang/String;)Lcom/example/fitfolio/entities/Role;
+getRoleName com.example.fitfolio.entities.Role#getRoleName()Ljava/lang/String;

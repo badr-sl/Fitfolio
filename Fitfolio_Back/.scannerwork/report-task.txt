@@ -1,0 +1,7 @@
+organization=sonar-test-badr
+projectKey=sonar-test-badr_testfitfolio
+serverUrl=https://sonarcloud.io
+serverVersion=8.0.0.58741
+dashboardUrl=https://sonarcloud.io/dashboard?id=sonar-test-badr_testfitfolio
+ceTaskId=AZP52rH9m2pIx8C1y0Eg
+ceTaskUrl=https://sonarcloud.io/api/ce/task?id=AZP52rH9m2pIx8C1y0Eg

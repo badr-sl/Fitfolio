@@ -1,0 +1,8 @@
+com.example.fitfolio.controllers.ActiviteController#activites(Ljava/lang/String;)Ljava/util/List;
+false
+62944b4cd62b7149a57537e2d9ce1c8f
+java.lang.String#isEmpty()Z
+==
+listActivitesByGoal com.example.fitfolio.service.ActiviteService#listActivitesByGoal(Ljava/lang/String;)Ljava/util/List;
+listAllActivites com.example.fitfolio.service.ActiviteService#listAllActivites()Ljava/util/List;
+println java.io.PrintStream#println(Ljava/lang/String;)V

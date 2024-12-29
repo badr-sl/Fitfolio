@@ -1,0 +1,6 @@
+com.example.fitfolio.controllers.PlanningController#getPlanningsByUserId(Ljava/lang/Long;)LResponseEntity;
+false
+63a96b701f00ea489ae707fde238956c
+==
+findPlanningsByUserId com.example.fitfolio.service.PlanningService#findPlanningsByUserId(Ljava/lang/Long;)Ljava/util/List;
+isEmpty java.util.List#isEmpty()Z

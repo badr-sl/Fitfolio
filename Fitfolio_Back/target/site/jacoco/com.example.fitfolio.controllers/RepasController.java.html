@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>RepasController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">fitfolio</a> &gt; <a href="index.source.html" class="el_package">com.example.fitfolio.controllers</a> &gt; <span class="el_source">RepasController.java</span></div><h1>RepasController.java</h1><pre class="source lang-java linenums">package com.example.fitfolio.controllers;
+
+import java.util.List;
+
+import org.json.JSONException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import com.example.fitfolio.dto.RepasDto;
+import com.example.fitfolio.entities.Repas;
+import com.example.fitfolio.service.RepasService;
+
+@RestController
+@RequestMapping(&quot;/fitfolio&quot;)
+public class RepasController {
+	
+    public RepasService repasService;
+    
+<span class="fc" id="L20">    public RepasController(RepasService repasService) {</span>
+<span class="fc" id="L21">		this.repasService = repasService;</span>
+<span class="fc" id="L22">	}</span>
+   
+	@GetMapping(path = &quot;/repas&quot;)
+  
+    public List&lt;Repas&gt; repass() {
+		
+<span class="fc" id="L28">        return repasService.listRepas(); </span>
+    }
+
+    @PostMapping(path = &quot;/addRepas&quot;)
+    //@PostAuthorize(&quot;hasAuthority('ADMIN')&quot;)
+    public  ResponseEntity&lt;RepasDto&gt; saveRepas(@RequestBody Repas repas) throws JSONException { 
+<span class="fc" id="L34">    	System.out.println(&quot;entree yyyyyyyyyyyyyyyyyy&quot;);</span>
+<span class="fc" id="L35">    	return  repasService.addNewRepas(repas); </span>
+    }
+
+    @DeleteMapping(path = &quot;/deleteRepas/{id}&quot;)
+    //@PostAuthorize(&quot;hasAuthority('ADMIN')&quot;)
+    public ResponseEntity&lt;String&gt; deleteRepas(@PathVariable Long id) {
+<span class="fc" id="L41">        System.out.println(&quot;Entrée dans deleteRepas avec id: &quot; + id);</span>
+<span class="fc" id="L42">        return repasService.deleteRepas(id);</span>
+    }
+
+    @GetMapping(path = &quot;/repas/midi&quot;)
+    public List&lt;Repas&gt; getMidiRepas() {
+<span class="fc" id="L47">        return repasService.findRepasByTyperepas(&quot;Midi&quot;);</span>
+    }
+
+    @GetMapping(path = &quot;/repas/matin&quot;)
+    public List&lt;Repas&gt; getMatinRepas() {
+<span class="fc" id="L52">        return repasService.findRepasByTyperepas(&quot;Matin&quot;);</span>
+    }
+
+
+  @GetMapping(path = &quot;/repas/nuit&quot;)
+public List&lt;Repas&gt; getnuitRepas() {
+<span class="fc" id="L58">    return repasService.findRepasByTyperepas(&quot;Nuit&quot;);</span>
+}
+
+
+    @GetMapping(&quot;/repas/objectif&quot;)
+    public ResponseEntity&lt;List&lt;Repas&gt;&gt; getRepasByGoal(@RequestParam String objectif) {
+        try {
+<span class="fc" id="L65">            List&lt;Repas&gt; repasList = repasService.listRepasByGoal(objectif);</span>
+<span class="fc bfc" id="L66" title="All 2 branches covered.">            if (repasList.isEmpty()) {</span>
+<span class="fc" id="L67">                return new ResponseEntity&lt;&gt;(HttpStatus.NO_CONTENT);</span>
+            }
+<span class="fc" id="L69">            return new ResponseEntity&lt;&gt;(repasList, HttpStatus.OK);</span>
+<span class="fc" id="L70">        } catch (Exception e) {</span>
+<span class="fc" id="L71">            return new ResponseEntity&lt;&gt;(HttpStatus.INTERNAL_SERVER_ERROR);</span>
+        }
+    }
+}
+
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

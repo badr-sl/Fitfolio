@@ -1,0 +1,10 @@
+com.example.fitfolio.service.RepasService#deleteRepas(Ljava/lang/Long;)LResponseEntity;
+false
+99fa1b134c2121c8579c02108f349b42
+java.util.Optional#get()Ljava/lang/Object;
+java.util.Optional#isPresent()Z
+==
+!unknownMethod! !unknownMethod!
+contains java.util.Collection#contains(Ljava/lang/Object;)Z
+getRepass com.example.fitfolio.entities.Planning#getRepass()Ljava/util/Collection;
+remove java.util.Collection#remove(Ljava/lang/Object;)Z

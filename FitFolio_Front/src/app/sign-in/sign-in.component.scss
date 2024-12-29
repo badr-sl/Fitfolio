@@ -1,0 +1,161 @@
+/* Container principal pour la page de connexion */
+.sign-in-container {
+  display: flex; /* Permet aux sections de s'afficher côte à côte */
+  width: 100%; /* Prend toute la largeur de la fenêtre */
+  height: 100vh; /* Prend toute la hauteur de la fenêtre */
+  background-color: #f9f9fc; /* Couleur de fond légèrement grise */
+  border-radius: 16px; /* Coins arrondis pour un look moderne */
+  overflow: hidden; /* Cache tout dépassement de contenu */
+}
+
+/* Section gauche de la page (texte et logo) */
+.left-section {
+  flex: 1; /* Occupe un espace égal à la section de droite */
+  display: flex; /* Utilise flexbox pour organiser le contenu */
+  flex-direction: column; /* Dispose le contenu verticalement */
+  justify-content: center; /* Centre verticalement le contenu */
+  padding: 30px 60px; /* Ajoute un espace intérieur pour l'espacement */
+  background-color: #f9f9fc; /* Même couleur que le conteneur principal */
+  position: relative; /* Nécessaire pour positionner l'élément ::before */
+}
+
+/* Conteneur du logo */
+.logo {
+  position: absolute; /* Positionne le logo de manière absolue dans la section */
+  top: 10px; /* Distance par rapport au haut de la section */
+  left: 10px; /* Distance par rapport au côté gauche de la section */
+}
+
+/* Image du logo */
+.logo img {
+  width: 150px; /* Largeur du logo */
+}
+
+/* Conteneur pour le texte "Sign In" */
+.sign-in-text {
+  position: relative; /* Nécessaire pour la superposition correcte */
+  z-index: 2; /* S'assure que le texte est au-dessus de l'élément ::before */
+  text-align: left; /* Aligne le texte à gauche */
+  margin-left: 300px; /* Décale le texte vers la droite */
+  max-width: 200px; /* Limite la largeur du conteneur */
+}
+
+/* Style du titre "Sign In" */
+.sign-in-text h2 {
+  font-size: 36px; /* Taille de la police */
+  font-weight: bold; /* Rend le texte gras */
+  margin-bottom: 5px; /* Espace en bas du titre */
+  color: #000000; /* Couleur noire pour le texte */
+}
+
+/* Gradient bleu clair pour l'effet de fond de la section gauche */
+.left-section::before {
+  content: ''; /* Génère un élément vide */
+  position: absolute; /* Position absolue dans la section */
+  top: 0; /* Positionne en haut de la section */
+  left: 0; /* Positionne à gauche de la section */
+  width: 100%; /* Couvre toute la largeur */
+  height: 100%; /* Couvre toute la hauteur */
+  background: radial-gradient(rgba(40, 178, 247, 0.5), transparent 70%); /* Gradient bleu doux */
+  z-index: 1; /* Placé derrière le contenu */
+  pointer-events: none; /* Permet aux clics de passer à travers */
+}
+
+/* Paragraphe sous le texte "Sign In" */
+.left-section p {
+  font-size: 14px; /* Taille de la police */
+  margin-top: 5px; /* Espace au-dessus du paragraphe */
+}
+
+/* Lien dans le paragraphe */
+.left-section a {
+  cursor: pointer; /* Change le curseur en pointeur pour indiquer la cliquabilité */
+  position: relative; /* Position relative pour la superposition */
+  z-index: 3; /* Niveau de superposition supérieur pour s'assurer qu'il est au-dessus des autres éléments */
+  color: #007acc; /* Couleur bleue pour les liens */
+  text-decoration: none; /* Supprime le soulignement par défaut */
+  pointer-events: auto; /* Permet l'interaction */
+}
+
+/* Changement de couleur du lien au survol */
+.sign-in-text a:hover {
+  color: #005f99; /* Change la couleur du texte lors du survol */
+}
+
+/* Section droite pour le formulaire */
+.right-section {
+  flex: 1; /* Occupe un espace égal à la section gauche */
+  display: flex; /* Utilise flexbox pour organiser le contenu */
+  flex-direction: column; /* Dispose le contenu verticalement */
+  justify-content: center; /* Centre verticalement le contenu */
+  align-items: flex-start; /* Aligne le contenu à gauche */
+  padding: 0 20px 0 20px; /* Espacement intérieur */
+}
+
+/* Titre "Welcome Back" */
+.right-section h2 {
+  font-size: 30px; /* Taille de la police */
+  font-weight: bold; /* Rend le texte gras */
+  margin-bottom: 30px; /* Espace en bas du titre */
+  margin-left: 85px; /* Décale le titre vers la droite */
+}
+
+/* Style commun pour les champs de saisie */
+input[type="password"],
+input[type="email"],
+input[type="text"] {
+  width: 100%;
+  padding: 12px 40px 12px 12px; /* Espacement intérieur (espace pour l'icône à droite) */
+  border: 1px solid #d1d9e6; /* Bordure grise */
+  border-radius: 8px; /* Coins arrondis */
+  margin-top: 10px; /* Espace en haut */
+  background-color: #f3f6fc; /* Fond léger */
+  font-size: 16px; /* Taille de la police */
+}
+
+.form{
+  width:350px;
+}
+
+/* Icône de bascule de mot de passe */
+.toggle-password {
+  position: absolute; /* Positionne l'icône dans la section */
+  left: 310px; /* Décale l'icône vers la droite */
+  top: 23px; /* Position verticale de l'icône */
+  background: none; /* Pas de fond */
+  border: none; /* Pas de bordure */
+  cursor: pointer; /* Affiche le pointeur de la souris */
+  color: #7a869a; /* Couleur par défaut de l'icône */
+  font-size: 20px; /* Taille de l'icône */
+  outline: none; /* Supprime l'outline de focus */
+}
+
+/* Changement de couleur de l'icône au survol */
+.toggle-password:hover {
+  color: #005f99; /* Couleur bleue plus foncée */
+}
+
+/* Couleur du placeholder dans les champs de saisie */
+input::placeholder {
+  color: #7a869a; /* Couleur grise pour le placeholder */
+}
+
+
+/* Bouton "Sign In" */
+.sign-in-btn {
+  width: 100%;
+  background-color: #007acc; /* Couleur de fond bleue */
+  color: #ffffff; /* Couleur de texte blanche */
+  padding: 10px; /* Espacement intérieur */
+  border: none; /* Pas de bordure */
+  border-radius: 8px; /* Coins arrondis */
+  cursor: pointer; /* Affiche le pointeur de la souris */
+  font-size: 18px; /* Taille de la police */
+  margin-top: 30px; /* Espace en haut */
+  transition: background-color 0.3s; /* Transition douce pour la couleur */
+}
+
+/* Changement de couleur du bouton au survol */
+.sign-in-btn:hover {
+  background-color: #005f99; /* Couleur bleue plus foncée */
+}

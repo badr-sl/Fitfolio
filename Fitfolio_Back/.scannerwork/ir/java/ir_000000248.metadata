@@ -1,0 +1,5 @@
+com.example.fitfolio.controllers.PlanningController#getWeeklyActivities(Ljava/lang/Long;Ljava/lang/String;)LResponseEntity;
+false
+b8b7404ffb4b01b45788962dbd0d5d6d
+==
+fetchWeeklyActivities com.example.fitfolio.service.PlanningService#fetchWeeklyActivities(Ljava/lang/Long;Ljava/lang/String;)LResponseEntity;

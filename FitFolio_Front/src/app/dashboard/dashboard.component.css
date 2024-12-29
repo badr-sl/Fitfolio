@@ -1,0 +1,511 @@
+/* General Card Styling */
+.card {
+  border-radius: 16px;
+  box-shadow: 0 0 8px rgba(148, 148, 148, 0.6);
+  background-color:  rgba(255, 255, 255, 0.65);
+  border: none;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Specific Styling for Water Intake Card */
+.water-intake-card {
+  height: 100%; /* Takes up the full height */
+}
+
+.water-progress {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.water-progress .percentage {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #3e75ff; 
+}
+
+.progress-bar-container {
+  background-color: #e6e6e6;
+  height: 30px;
+  border-radius: 5px;
+  overflow: hidden;
+  margin-top: 10px;
+}
+
+.progress-bar {
+  height: 100%;
+  background-image: linear-gradient(to right, rgba(134, 198, 244, 1),rgba(54, 148, 215, 1), rgba(208, 117, 235, 1)) ; /* Matches percentage text */
+  border-radius: 5px;
+}
+
+.water-task-list {
+  margin-top: 20px;
+}
+
+
+.task-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.task-item:last-child {
+  border-bottom: none;
+}
+
+.task-status {
+  color: #28a745; /* Green for completed */
+}
+
+.sleep-card {
+  display: flex;
+  flex-direction: row; /* Aligns text and image side by side */
+  justify-content: space-around; /* Distributes space between content and image */
+  padding: 20px 30px 10px 30px; /* Adjust padding as needed */
+  border-radius: 16px;
+  height: fit-content;
+}
+.card-title{
+  font-size: 27px;
+  font-weight: 600;
+}
+.card-text{
+  color: rgb(106, 173, 221);
+  font-size: 23px;
+  font-weight: 500;
+  margin-top: -7px;
+}
+
+
+.card-image {
+  margin-left: auto; /* Adds space between the text and the image */
+}
+
+.sleep-image {
+  max-width: 230px; /* Adjust size as needed */
+  height: 100%; /* Maintains the aspect ratio */
+  display: block; /* Ensures it behaves as a block element */
+}
+
+.btn-container {
+  display: flex;
+  justify-content: center; /* Centers text in the container */
+  align-items: center;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.btn-container p {
+  font-size: large;
+  font-weight: 500;
+}
+
+.btn-c {
+  background-color: rgb(106, 173, 221);
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  padding: 8px 15px;
+  cursor: pointer;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s, transform 0.2s;
+  width: 100%; /* Ensure the button takes the full width of its container */
+}
+
+.btn-c:hover {
+  background-color: rgb(80, 140, 200);
+  transform: translateY(-2px);
+}
+
+
+.calories-card {
+  display: flex;
+  flex-direction: row; /* Aligns text and image side by side */
+  justify-content: space-around; /* Distributes space between content and image */
+  padding: 20px 30px 10px 30px; /* Adjust padding as needed */
+  border-radius: 16px;
+
+}
+
+.calories-card .card-content {
+  flex: 1; /* Ensures text content takes available space */
+  margin-top: 40px ;
+}
+
+.circular-progress-container {
+  position: relative;
+  width: 150px; /* Adjust as needed */
+  height: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100px;
+
+}
+
+.circular-progress {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg); /* Start from the top */
+  position: absolute;
+  border-radius: 100px;
+  
+}
+
+.circle-bg {
+  fill: none;
+  stroke: #e6e6e6; /* Light gray for the background circle */
+  stroke-width: 3;
+
+}
+
+.circle {
+  fill: none;
+  stroke: url(#gradient); /* Gradient for the progress */
+  stroke-width: 3;
+  stroke-linecap: round;
+  transition: stroke-dasharray 0.3s; /* Smooth animation */  
+}
+
+.inner-circle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px; /* Inner circle size */
+  height: 100px; /* Inner circle size */
+  background-color: rgb(106, 173, 221);; /* Light blue for the inner circle */
+  border-radius: 50%; /* Circular shape */
+}
+
+.inner-text {
+  text-align: center;
+  font-size: 17px; /* Adjust as needed */
+  font-weight: 500;
+  color: #ffffff; /* White text color */
+}
+.bmi-card {
+  background-image: url('/assets/Banner.png');
+  background-size: auto; /* Ensures the background image covers the entire card */
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Optional shadow */
+  padding: 30px;
+}
+
+.bmi-content {
+  display: flex;
+  justify-content: space-around; /* Space between text and chart */
+  align-items: center;
+}
+
+.bmi-content .card-title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #ffffff; /* White text color */
+  margin-bottom: 10px;
+}
+
+.bmi-status {
+  font-size: 1.2rem;
+  color: #ffffff; /* White text color */
+}
+
+.bmi-pie-container {
+  position: relative; /* Allows the text to be positioned inside */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 70%;
+}
+
+.bmi-image {
+  width: 100%; /* Ensures the image is responsive */
+  height: auto;
+}
+
+.bmi-value-overlay {
+  position: absolute;
+  top: 30%; /* Center vertically */
+  left: 65%; /* Center horizontally */
+  transform: translate(-50%, -50%); /* Adjusts positioning to center */
+  font-size: 19px; /* Adjust size as needed */
+  font-weight: bold;
+  color: #ffffff; /* White color for text */
+  text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3); /* Optional shadow for better contrast */
+}
+
+.workout-card {
+  border-radius: 15px;
+  background-color: #f1f9ff; /* Light background color */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.workout-graph-container {
+  margin: auto;
+  position: relative;
+    width: 70%;
+    overflow: hidden;
+  
+}
+.workout-graph svg {
+  width: 100%;
+
+}
+.workout-graph svg text {
+  font-size: 12px;
+  color: #666;
+}
+.y-axis-labels {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-right: 10px;
+}
+
+
+.y-label {
+  font-size: 12px;
+  color: #666;
+}
+
+.workout-graph {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 40px; /* Space for Y-axis labels */
+}
+
+
+
+
+
+
+
+
+
+.pdf-container {
+  font-family: 'Arial', sans-serif;
+  color: #333;
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+  background-color: white;
+  background-repeat: no-repeat;
+  background-size: cover;}
+
+.pdf-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.logo {
+  margin-bottom: 2px;
+}
+
+.user-info {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.user-info p {
+  font-size: 10px;
+  color: #555;
+}
+
+.metrics {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.metric-card {
+  background-color: rgba(255, 255, 255, 0.65);
+  border-radius: 8px;
+  box-shadow: 0 0 4px rgba(148, 148, 148, 0.5);
+  padding: 10px 15px;
+  text-align: center;
+}
+
+.calorie-info {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.calorie-info h2 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.calorie-chart {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 10px;
+}
+
+.calorie-chart h3 {
+  font-size: 18px;
+  color: #70c1ff;
+}
+
+.calorie-chart p {
+  font-size: 12px;
+  color: #999;
+}
+
+.progress-chart {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.progress-chart h2 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.progress-chart img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+.calorie-info {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.calorie-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.calories {
+  display: flex;
+  justify-content: center;
+  gap: 30px; /* Space between the "Consommées" and "Brûlées" sections */
+}
+
+.calorie-item {
+  text-align: center;
+}
+
+.circular-progress {
+  width: 120px;
+  height: 120px;
+  transform: rotate(-90deg); /* Start from the top */
+}
+
+.circle-bg {
+  fill: none;
+  stroke: #e6e6e6; /* Light gray background */
+  stroke-width: 3;
+}
+
+.circle {
+  fill: none;
+  stroke: #70c1ff; /* Light blue for progress */
+  stroke-width: 3;
+  stroke-linecap: round; /* Rounded ends for progress */
+}
+
+.circle-text {
+  font-size: 12px;
+  font-weight: bold;
+  fill: #333; /* Text color */
+  text-anchor: middle;
+  dominant-baseline: middle;
+}
+
+.calorie-value {
+  font-size: 16px;
+  font-weight: bold;
+  color: #70c1ff; /* Match progress bar color */
+}
+
+.calorie-label {
+  font-size: 14px;
+  color: #666; /* Label text color */
+}
+
+
+/* Center the progress-info container in the page */
+.progress-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.progress-info h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* SVG container with Y-axis labels */
+.svg-container-pdf {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px; /* Space between Y-axis labels and the SVG */
+  position: relative;
+}
+
+/* Y-axis labels styling */
+.y-axis-labels-pdf {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 200px; /* Match SVG height */
+}
+
+.y-label-pdf {
+  font-size: 12px;
+  color: #666;
+  text-align: right; /* Align labels to the right */
+  margin-right: 5px;
+}
+
+/* SVG styles */
+.svg-container-pdf svg {
+  border: 1px solid #ddd; /* Optional border for visibility */
+}
+
+.svg-container-pdf polyline {
+  stroke: #2196f3; /* Line color */
+}
+
+.svg-container-pdf text {
+  font-size: 12px;
+  fill: #666; /* Label text color */
+}
+
+/* Responsive Adjustments */
+@media (max-width: 600px) {
+  .svg-container-pdf svg {
+    width: 300px;
+    height: 150px;
+  }
+
+  .y-axis-labels-pdf {
+    height: 150px;
+  }
+
+  .y-label-pdf {
+    font-size: 10px;
+  }
+}

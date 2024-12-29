@@ -1,0 +1,62 @@
+
+Çcom.example.fitfolio.controllers.UserController#saveRole(Lcom/example/fitfolio/entities/Role;)Lcom/example/fitfolio/entities/Role;ç
+ÇC:/Users/21262/OneDrive/Bureau/5IIR/Projet/POUR TEST 2/fitfolio/src/main/java/com/example/fitfolio/controllers/UserController.java: :("startingBlock*Î
+startingBlock: :(3ô
+ñ
+9 9(#
+%2"
+__annotate*+
+
+__unknown_file (
+PostMapping*K
+
+__unknown_file (/
+-
+appRole"com.example.fitfolio.entities.Roleô
+ñ
+: :(%
+%3"
+__annotate*+
+
+__unknown_file (
+RequestBody*K
+
+__unknown_file (/
+-
+appRole"com.example.fitfolio.entities.Roleí
+è
+:+ :(2-
+appRole"com.example.fitfolio.entities.Role"__annotation*"
+
+__unknown_file (
+
+%2*"
+
+__unknown_file (
+
+%3*
+1*Û
+1; ;(•
+¢
+; ;(.
+%0(com.example.fitfolio.service.UserService"__id*`
+
+__unknown_file (D*B1
+/com.example.fitfolio.controllers.UserController"
+userServiceÉÄ
+; ;(.(
+%1"com.example.fitfolio.entities.Role"}com.example.fitfolio.service.UserService#addNewRole(Lcom/example/fitfolio/entities/Role;)Lcom/example/fitfolio/entities/Role;*L
+
+__unknown_file (0
+.
+%0(com.example.fitfolio.service.UserService*K
+
+__unknown_file (/
+-
+appRole"com.example.fitfolio.entities.Role20addNewRole(Lcom/example/fitfolio/entities/Role;)"6
+; ;(/*
+(
+%1"com.example.fitfolio.entities.Role:9
+: :(2-
+appRole"com.example.fitfolio.entities.RoleB31
+/com.example.fitfolio.controllers.UserControllerH

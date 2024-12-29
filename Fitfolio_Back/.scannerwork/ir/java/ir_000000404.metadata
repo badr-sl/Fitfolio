@@ -1,0 +1,10 @@
+com.example.fitfolio.service.UserService#calculateBMI(Ljava/lang/Long;)Ljava/lang/Double;
+false
+d7c2662cdc9dcb0c7f528da58a9cd8da
+java.lang.RuntimeException#<init>(Ljava/lang/String;)V
+java.lang.RuntimeException#instance-init#
+java.util.Optional#orElseThrow(Ljava/util/function/Supplier;)Ljava/lang/Object;
+==
+findById com.example.fitfolio.repo.UserRepository#findById(Ljava/lang/Long;)Ljava/util/Optional;
+getPoids com.example.fitfolio.entities.Utilisateur#getPoids()Ljava/lang/Double;
+getTaille com.example.fitfolio.entities.Utilisateur#getTaille()Ljava/lang/Double;

@@ -1,0 +1,7 @@
+com.example.fitfolio.controllers.UserController#addRoleToUser(Lcom/example/fitfolio/dto/LoginDto;)V
+false
+d5b6ea6b3e10362eba02aa34feb6aa44
+==
+addRoleToUser com.example.fitfolio.service.UserService#addRoleToUser(Ljava/lang/String;Ljava/lang/String;)V
+getRole com.example.fitfolio.dto.LoginDto#getRole()Ljava/lang/String;
+getUser com.example.fitfolio.dto.LoginDto#getUser()Ljava/lang/String;

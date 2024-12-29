@@ -1,0 +1,5 @@
+com.example.fitfolio.controllers.UserController#login(Ljava/lang/String;Ljava/lang/String;)LResponseEntity;
+false
+1017e6fdcf43542e4a669b402e73674c
+==
+login com.example.fitfolio.service.UserService#login(Ljava/lang/String;Ljava/lang/String;)LResponseEntity;

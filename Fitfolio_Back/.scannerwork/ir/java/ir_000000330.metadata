@@ -1,0 +1,5 @@
+com.example.fitfolio.controllers.RepasController#repass()Ljava/util/List;
+false
+86b4e549c1a91ebc4b4973c64145f75e
+==
+listRepas com.example.fitfolio.service.RepasService#listRepas()Ljava/util/List;

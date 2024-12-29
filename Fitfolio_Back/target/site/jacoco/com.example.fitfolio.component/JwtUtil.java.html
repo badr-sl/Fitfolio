@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>JwtUtil.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">fitfolio</a> &gt; <a href="index.source.html" class="el_package">com.example.fitfolio.component</a> &gt; <span class="el_source">JwtUtil.java</span></div><h1>JwtUtil.java</h1><pre class="source lang-java linenums">package com.example.fitfolio.component;
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.JWTVerifier;
+import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.interfaces.DecodedJWT;
+import java.util.Date;
+
+import org.springframework.stereotype.Component;
+
+@Component
+<span class="fc" id="L11">public class JwtUtil {</span>
+
+<span class="fc" id="L13">    private String SECRET_KEY = &quot;J0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbGkiLCJleHAiOjE3MzIwNDQxOTcsImlhdCI6MTczMjA0Mzg5N30.8Y&quot;;</span>
+
+    public String generateAccessToken(String subject) {
+<span class="fc" id="L16">        Algorithm algorithm = Algorithm.HMAC256(SECRET_KEY);</span>
+<span class="fc" id="L17">        return JWT.create()</span>
+<span class="fc" id="L18">                .withSubject(subject)</span>
+<span class="fc" id="L19">                .withIssuedAt(new Date())</span>
+<span class="fc" id="L20">                .withExpiresAt(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 300))</span>
+<span class="fc" id="L21">                .sign(algorithm);</span>
+    }
+
+    public String createRefreshToken(String subject) {
+<span class="fc" id="L25">        Algorithm algorithm = Algorithm.HMAC256(SECRET_KEY);</span>
+<span class="fc" id="L26">        return JWT.create()</span>
+<span class="fc" id="L27">                .withSubject(subject)</span>
+<span class="fc" id="L28">                .withIssuedAt(new Date())</span>
+<span class="fc" id="L29">                .withExpiresAt(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 300))</span>
+<span class="fc" id="L30">                .sign(algorithm);</span>
+    }
+
+    // Vérification du token
+    public DecodedJWT verifySignature(String token) {
+        try {
+<span class="fc" id="L36">            Algorithm algorithm = Algorithm.HMAC256(SECRET_KEY);</span>
+<span class="fc" id="L37">            JWTVerifier verifier = JWT.require(algorithm).build();</span>
+<span class="fc" id="L38">            return verifier.verify(token);</span>
+<span class="fc" id="L39">        } catch (Exception e) {</span>
+<span class="fc" id="L40">        	System.out.println(&quot;attention token invalide ou expire&quot;+token);</span>
+<span class="fc" id="L41">            return null;</span>
+        }
+    }
+    
+    public String[] getRoles(DecodedJWT decodedJwt) {
+<span class="fc" id="L46">        return decodedJwt.getClaim(&quot;roles&quot;).asArray(String.class);</span>
+    }
+
+
+    public String getUsername(DecodedJWT decodedJwt) {
+<span class="fc" id="L51">        return decodedJwt.getSubject();</span>
+    }
+    
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

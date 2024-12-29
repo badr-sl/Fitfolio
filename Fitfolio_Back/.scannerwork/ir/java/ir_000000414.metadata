@@ -1,0 +1,12 @@
+com.example.fitfolio.service.PlanningService#fetchActivitesByJourAndUtilisateur(Ljava/lang/String;Ljava/lang/Long;)LResponseEntity;
+false
+cd04f7f1f1e61e0abe64f9f3cd32ef36
+java.util.ArrayList#<init>(Ljava/util/Collection;)V
+java.util.ArrayList#instance-init#
+java.util.Optional#get()Ljava/lang/Object;
+java.util.Optional#isEmpty()Z
+java.util.Optional#orElse(Ljava/lang/Object;)Ljava/lang/Object;
+==
+findById com.example.fitfolio.repo.UserRepository#findById(Ljava/lang/Long;)Ljava/util/Optional;
+findByJourAndUtilisateur com.example.fitfolio.repo.PlanningRepository#findByJourAndUtilisateur(Ljava/lang/String;Lcom/example/fitfolio/entities/Utilisateur;)Ljava/util/Optional;
+getActivites com.example.fitfolio.entities.Planning#getActivites()Ljava/util/Collection;

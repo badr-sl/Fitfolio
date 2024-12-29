@@ -1,0 +1,6 @@
+com.example.fitfolio.controllers.PlanningController#getAllActivities(Ljava/lang/Long;)LResponseEntity;
+false
+b0fd4fe8bc1d4630ccf9acdaa39ff498
+==
+fetchActivitiesByUtilisateur com.example.fitfolio.service.PlanningService#fetchActivitiesByUtilisateur(Ljava/lang/Long;)Ljava/util/List;
+isEmpty java.util.List#isEmpty()Z

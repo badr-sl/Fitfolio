@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Repas.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">fitfolio</a> &gt; <a href="index.source.html" class="el_package">com.example.fitfolio.entities</a> &gt; <span class="el_source">Repas.java</span></div><h1>Repas.java</h1><pre class="source lang-java linenums">package com.example.fitfolio.entities;
+
+import jakarta.persistence.*;
+@Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS) 
+public class Repas  {
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String titre;
+
+    private String description;
+
+    private String categorie;
+
+    private Double nbrcalories;
+
+    private String typerepas;
+
+    private String objectif;
+
+    private String image;
+
+
+<span class="fc" id="L24">    public Repas() {}</span>
+
+<span class="fc" id="L26">    public Repas(Long id,String titre, String description, String categorie, Double nbrcalories, String typerepas, String objectif, String image) {</span>
+<span class="fc" id="L27">        this.id=id;</span>
+<span class="fc" id="L28">        this.titre = titre;</span>
+<span class="fc" id="L29">        this.description = description;</span>
+<span class="fc" id="L30">        this.categorie = categorie;</span>
+<span class="fc" id="L31">        this.nbrcalories = nbrcalories;</span>
+<span class="fc" id="L32">        this.typerepas = typerepas;</span>
+<span class="fc" id="L33">        this.objectif = objectif;</span>
+<span class="fc" id="L34">        this.image = image;</span>
+<span class="fc" id="L35">    }</span>
+
+    public String getTitre() {
+<span class="fc" id="L38">        return titre;</span>
+    }
+
+    public void setTitre(String titre) {
+<span class="fc" id="L42">        this.titre = titre;</span>
+<span class="fc" id="L43">    }</span>
+
+    public String getDescription() {
+<span class="fc" id="L46">        return description;</span>
+    }
+
+    public void setDescription(String description) {
+<span class="fc" id="L50">        this.description = description;</span>
+<span class="fc" id="L51">    }</span>
+
+    public String getCategorie() {
+<span class="fc" id="L54">        return categorie;</span>
+    }
+
+    public void setCategorie(String categorie) {
+<span class="fc" id="L58">        this.categorie = categorie;</span>
+<span class="fc" id="L59">    }</span>
+
+    public Double getNbrcalories() {
+<span class="fc" id="L62">        return nbrcalories;</span>
+    }
+
+    public void setNbrcalories(Double nbrcalories) {
+<span class="fc" id="L66">        this.nbrcalories = nbrcalories;</span>
+<span class="fc" id="L67">    }</span>
+
+    public String getTyperepas() {
+<span class="fc" id="L70">        return typerepas;</span>
+    }
+
+    public void setTyperepas(String typerepas) {
+<span class="fc" id="L74">        this.typerepas = typerepas;</span>
+<span class="fc" id="L75">    }</span>
+
+    public String getObjectif() {
+<span class="fc" id="L78">        return objectif;</span>
+    }
+
+    public void setObjectif(String objectif) {
+<span class="fc" id="L82">        this.objectif = objectif;</span>
+<span class="fc" id="L83">    }</span>
+
+    public String getImage() {
+<span class="fc" id="L86">        return image;</span>
+    }
+
+    public void setImage(String image) {
+<span class="fc" id="L90">        this.image = image;</span>
+<span class="fc" id="L91">    }</span>
+
+    public Long getId() {
+<span class="fc" id="L94">        return id;</span>
+    }
+
+    public void setId(Long id) {
+<span class="fc" id="L98">        this.id = id;</span>
+<span class="fc" id="L99">    }</span>
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

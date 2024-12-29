@@ -1,0 +1,10 @@
+com.example.fitfolio.service.ActiviteService#deleteActivite(Ljava/lang/Long;)LResponseEntity;
+false
+d18252209b239ab99b9aef5dc5bcbfbc
+java.util.Optional#get()Ljava/lang/Object;
+java.util.Optional#isPresent()Z
+==
+!unknownMethod! !unknownMethod!
+contains java.util.Collection#contains(Ljava/lang/Object;)Z
+getActivites com.example.fitfolio.entities.Planning#getActivites()Ljava/util/Collection;
+remove java.util.Collection#remove(Ljava/lang/Object;)Z

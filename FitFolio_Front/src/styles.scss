@@ -1,0 +1,18 @@
+/* Global styling */
+html, body {
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Styles to apply dynamically when the global-style class is active */
+  body.global-style {
+    background-image: linear-gradient(to top left, rgba(137, 54, 237, 0.2), rgba(82, 152, 196, 0.3), rgb(224, 232, 237));
+    background-repeat: no-repeat;
+    background-size: cover; /* Ensures the background covers the whole area */
+    padding-bottom: 30px;
+  
+    /* Angular Material theme */
+    @import "@angular/material/prebuilt-themes/indigo-pink.css";
+  }
+  

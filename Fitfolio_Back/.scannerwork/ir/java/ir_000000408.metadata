@@ -1,0 +1,13 @@
+com.example.fitfolio.service.PlanningService#addNewPlanning(Lcom/example/fitfolio/entities/Planning;)LResponseEntity;
+false
+0b7e00b8e57db18e2bd84328df4ef31f
+com.example.fitfolio.dto.PlanningDto#<init>()V
+com.example.fitfolio.dto.PlanningDto#instance-init#
+==
+!unknownMethod! !unknownMethod!
+findByJour com.example.fitfolio.repo.PlanningRepository#findByJour(Ljava/lang/String;)Lcom/example/fitfolio/entities/Planning;
+getId com.example.fitfolio.entities.Planning#getId()Ljava/lang/Long;
+getJour com.example.fitfolio.entities.Planning#getJour()Ljava/lang/String;
+setId com.example.fitfolio.entities.Planning#setId(Ljava/lang/Long;)V
+setMessage com.example.fitfolio.dto.PlanningDto#setMessage(Ljava/lang/String;)V
+setPlanning com.example.fitfolio.dto.PlanningDto#setPlanning(Lcom/example/fitfolio/entities/Planning;)V

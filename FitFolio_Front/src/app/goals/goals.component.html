@@ -1,0 +1,35 @@
+<div class="goal-container">
+  <!-- Button to proceed to the next step -->
+  <button class="circle-btn" (click)="goToNextStep()">
+    ➔
+  </button>
+
+  <div id="successMessageDiv" *ngIf="successMessage" class="hidden-for-testing">
+    {{ successMessage }}
+  </div>
+
+  <!-- Error Message -->
+  <div id="errorMessageDiv" *ngIf="errorMessage" class="hidden-for-testing" style="color: red;">
+    {{ errorMessage }}
+  </div>
+
+  <h1>What is your goal?</h1>
+  <p>It will help us to choose the best program for you</p>
+
+  <!-- Container for goal options -->
+  <div class="goal-options">
+    <!-- Goal Card: Lean & Tone -->
+    <div class="goal-card" (click)="selectGoal('Lean & Tone')">
+      <img src="assets/goal.image.png" alt="Lean & Tone" />
+      <h3>Lean & Tone</h3>
+      <p>I'm "skinny fat". I look thin but have no shape. I want to add lean muscle in the right way.</p>
+    </div>
+
+    <!-- Goal Card: Lose Fat -->
+    <div class="goal-card" (click)="selectGoal('Lose Fat')">
+      <img src="assets/goal2.image.png" alt="Lose Fat" />
+      <h3>Lose Fat</h3>
+      <p>I have over 20 lbs to lose. I want to drop all this fat and gain muscle mass.</p>
+    </div>
+  </div>
+</div>

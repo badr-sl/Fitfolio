@@ -1,0 +1,5 @@
+com.example.fitfolio.controllers.UserController#GetUsers()Ljava/util/List;
+false
+8ff5488c71c57f9f62fba40b5976b98a
+==
+listUsers com.example.fitfolio.service.UserService#listUsers()Ljava/util/List;

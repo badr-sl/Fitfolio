@@ -1,0 +1,34 @@
+com.example.fitfolio.service.UserService#addNewUser(Lcom/example/fitfolio/entities/Utilisateur;)Lcom/example/fitfolio/dto/UserDto;
+false
+a7113946fd07dd4dbb28969d1bef4118
+com.example.fitfolio.dto.UserDto#<init>()V
+com.example.fitfolio.dto.UserDto#instance-init#
+==
+!unknownMethod! !unknownMethod!
+findByUsername com.example.fitfolio.repo.UserRepository#findByUsername(Ljava/lang/String;)Lcom/example/fitfolio/entities/Utilisateur;
+getAge com.example.fitfolio.entities.Utilisateur#getAge()I
+getId com.example.fitfolio.entities.Utilisateur#getId()Ljava/lang/Long;
+getNom com.example.fitfolio.entities.Utilisateur#getNom()Ljava/lang/String;
+getObjectif com.example.fitfolio.entities.Utilisateur#getObjectif()Ljava/lang/String;
+getPassword com.example.fitfolio.entities.Utilisateur#getPassword()Ljava/lang/String;
+getPoids com.example.fitfolio.entities.Utilisateur#getPoids()Ljava/lang/Double;
+getPrenom com.example.fitfolio.entities.Utilisateur#getPrenom()Ljava/lang/String;
+getRoles com.example.fitfolio.entities.Utilisateur#getRoles()Ljava/util/Collection;
+getSexe com.example.fitfolio.entities.Utilisateur#getSexe()Ljava/lang/String;
+getTaille com.example.fitfolio.entities.Utilisateur#getTaille()Ljava/lang/Double;
+getTelephone com.example.fitfolio.entities.Utilisateur#getTelephone()Ljava/lang/String;
+getUsername com.example.fitfolio.entities.Utilisateur#getUsername()Ljava/lang/String;
+isEmpty java.util.Collection#isEmpty()Z
+setAge com.example.fitfolio.entities.Utilisateur#setAge(I)V
+setAppUser com.example.fitfolio.dto.UserDto#setAppUser(Lcom/example/fitfolio/entities/Utilisateur;)V
+setId com.example.fitfolio.entities.Utilisateur#setId(Ljava/lang/Long;)V
+setMessage com.example.fitfolio.dto.UserDto#setMessage(Ljava/lang/String;)V
+setNom com.example.fitfolio.entities.Utilisateur#setNom(Ljava/lang/String;)V
+setObjectif com.example.fitfolio.entities.Utilisateur#setObjectif(Ljava/lang/String;)V
+setPassword com.example.fitfolio.entities.Utilisateur#setPassword(Ljava/lang/String;)V
+setPoids com.example.fitfolio.entities.Utilisateur#setPoids(Ljava/lang/Double;)V
+setPrenom com.example.fitfolio.entities.Utilisateur#setPrenom(Ljava/lang/String;)V
+setRoles com.example.fitfolio.entities.Utilisateur#setRoles(Ljava/util/Collection;)V
+setSexe com.example.fitfolio.entities.Utilisateur#setSexe(Ljava/lang/String;)V
+setTaille com.example.fitfolio.entities.Utilisateur#setTaille(Ljava/lang/Double;)V
+setTelephone com.example.fitfolio.entities.Utilisateur#setTelephone(Ljava/lang/String;)V

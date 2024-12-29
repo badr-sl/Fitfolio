@@ -1,0 +1,21 @@
+
+Jcom.example.fitfolio.controllers.UserController#GetUsers()Ljava/util/List;ç
+ÇC:/Users/21262/OneDrive/Bureau/5IIR/Projet/POUR TEST 2/fitfolio/src/main/java/com/example/fitfolio/controllers/UserController.java) )(%"1*†
+1* *(•
+¢
+* *(.
+%0(com.example.fitfolio.service.UserService"__id*`
+
+__unknown_file (D*B1
+/com.example.fitfolio.controllers.UserController"
+userServiceƒ¡
+* *(&
+%1java.util.List"Dcom.example.fitfolio.service.UserService#listUsers()Ljava/util/List;*L
+
+__unknown_file (0
+.
+%0(com.example.fitfolio.service.UserService2listUsers()""
+* *('
+
+%1java.util.ListB31
+/com.example.fitfolio.controllers.UserControllerH

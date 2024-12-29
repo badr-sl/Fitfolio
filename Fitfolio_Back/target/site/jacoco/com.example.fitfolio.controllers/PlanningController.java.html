@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PlanningController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">fitfolio</a> &gt; <a href="index.source.html" class="el_package">com.example.fitfolio.controllers</a> &gt; <span class="el_source">PlanningController.java</span></div><h1>PlanningController.java</h1><pre class="source lang-java linenums">package com.example.fitfolio.controllers;
+
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+import com.example.fitfolio.dto.ActiviteDTO1;
+import org.json.JSONException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PostAuthorize;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.example.fitfolio.dto.PlanningDto;
+import com.example.fitfolio.entities.Activite;
+import com.example.fitfolio.entities.Planning;
+import com.example.fitfolio.entities.*;
+import com.example.fitfolio.service.PlanningService;
+import com.example.fitfolio.repo.*;
+
+@RestController
+@RequestMapping(&quot;/fitfolio&quot;)
+public class PlanningController {
+
+    @Autowired
+    public PlanningService planningService;
+    @Autowired
+    public UserRepository UserRepository;
+
+    @Autowired
+    public PlanningRepository  PlanningRepository;
+
+<span class="fc" id="L43">    public PlanningController(PlanningService planningService) {</span>
+<span class="fc" id="L44">        this.planningService = planningService;</span>
+<span class="fc" id="L45">    }</span>
+
+    @GetMapping(path = &quot;/plannings&quot;)
+    @PostAuthorize(&quot;hasAuthority('USER')&quot;)
+    public List&lt;Planning&gt; plannings() {
+
+<span class="fc" id="L51">        return planningService.listPlanning();</span>
+    }
+
+    @PostMapping(path = &quot;/addPlanning&quot;)
+    //@PostAuthorize(&quot;hasAuthority('ADMIN')&quot;)
+    public  ResponseEntity&lt;PlanningDto&gt; savePlanning(@RequestBody Planning planning) throws JSONException {
+
+<span class="fc" id="L58">        return  planningService.addNewPlanning(planning);</span>
+    }
+
+    @DeleteMapping(path = &quot;/deletePlanning/{id}&quot;)
+    //@PostAuthorize(&quot;hasAuthority('ADMIN')&quot;)
+    public ResponseEntity&lt;String&gt; deleteRepas(@PathVariable Long id) {
+<span class="fc" id="L64">        System.out.println(&quot;Entrée dans deleteRepas avec id: &quot; + id);</span>
+<span class="fc" id="L65">        return planningService.deletePlanning(id);</span>
+    }
+    @GetMapping(&quot;/allplanning/{id}&quot;)
+    public ResponseEntity&lt;List&lt;Planning&gt;&gt; getPlanningsByUserId(@PathVariable(&quot;id&quot;) Long utilisateurId) {
+<span class="fc" id="L69">        List&lt;Planning&gt; plannings = planningService.findPlanningsByUserId(utilisateurId);</span>
+
+<span class="fc bfc" id="L71" title="All 2 branches covered.">        if (plannings.isEmpty()) {</span>
+<span class="fc" id="L72">            return new ResponseEntity&lt;&gt;(HttpStatus.NO_CONTENT);</span>
+        }
+<span class="fc" id="L74">        return new ResponseEntity&lt;&gt;(plannings, HttpStatus.OK);</span>
+    }
+
+
+
+    @PostMapping(path = &quot;/planning/addRepasToPlanning&quot;)
+    public ResponseEntity&lt;PlanningDto&gt; addRepasToPlanning(
+            @RequestParam(&quot;jour&quot;) String jour,
+            @RequestParam(&quot;utilisateurId&quot;) Long utilisateurId,
+            @RequestBody List&lt;Repas&gt; repasList) {
+
+
+<span class="fc" id="L86">        return planningService.addRepasToPlanning(jour, utilisateurId, repasList);</span>
+    }
+
+    @PostMapping(path = &quot;/planning/addActivitesToPlanning&quot;)
+    public ResponseEntity&lt;PlanningDto&gt; addActivitesToPlanning(
+            @RequestParam(&quot;jour&quot;) String jour,
+            @RequestParam(&quot;utilisateurId&quot;) Long utilisateurId,
+            @RequestBody List&lt;Activite&gt; activiteList) {
+
+<span class="fc" id="L95">        return planningService.addActivitesToPlanning(jour, utilisateurId, activiteList);</span>
+    }
+
+    @GetMapping(&quot;/planning/activites&quot;)
+    public ResponseEntity&lt;List&lt;Activite&gt;&gt; getActivitesByJourAndUtilisateur(
+            @RequestParam(&quot;jour&quot;) String jour,
+            @RequestParam(&quot;utilisateurId&quot;) Long utilisateurId) {
+
+<span class="fc" id="L103">        return planningService.fetchActivitesByJourAndUtilisateur(jour, utilisateurId);</span>
+    }
+
+
+    @GetMapping(&quot;/planning/repas&quot;)
+    public ResponseEntity&lt;List&lt;Repas&gt;&gt; getRepasByJourAndUtilisateur(
+            @RequestParam(&quot;jour&quot;) String jour,
+            @RequestParam(&quot;utilisateurId&quot;) Long utilisateurId) {
+
+<span class="nc" id="L112">        return planningService.fetchRepasByJourAndUtilisateur(jour, utilisateurId);</span>
+    }
+
+    @GetMapping(&quot;/planning/weeklyActivities&quot;)
+    public ResponseEntity&lt;List&lt;Activite&gt;&gt; getWeeklyActivities(
+            @RequestParam(&quot;utilisateurId&quot;) Long utilisateurId,
+            @RequestParam(&quot;currentDate&quot;) String currentDate) {
+
+<span class="fc" id="L120">        return planningService.fetchWeeklyActivities(utilisateurId, currentDate);</span>
+    }
+
+    @GetMapping(&quot;/planning/calculateCalories&quot;)
+    public ResponseEntity&lt;Double&gt; calculateDailyCalories(
+            @RequestParam(&quot;utilisateurId&quot;) Long utilisateurId,
+            @RequestParam(&quot;jour&quot;) String jour) {
+<span class="fc" id="L127">        return planningService.calculateDailyCalories(utilisateurId, jour);</span>
+    }
+
+
+    @GetMapping(&quot;/weekly-repas&quot;)
+    public ResponseEntity&lt;List&lt;Repas&gt;&gt; fetchWeeklyRepas(
+            @RequestParam Long utilisateurId,    // User ID
+            @RequestParam String startDate,      // Start date of registration (yyyy-MM-dd)
+            @RequestParam int weekNumber,        // Week number to fetch (e.g., 2 for week 2)
+            @RequestParam(required = false) String day) { // Optional day like 'lundi'
+
+        // Find the user by ID
+<span class="fc" id="L139">        Optional&lt;Utilisateur&gt; optionalUtilisateur = UserRepository.findById(utilisateurId);</span>
+<span class="fc bfc" id="L140" title="All 2 branches covered.">        if (optionalUtilisateur.isEmpty()) {</span>
+<span class="fc" id="L141">            return new ResponseEntity&lt;&gt;(HttpStatus.NOT_FOUND);</span>
+        }
+
+<span class="fc" id="L144">        Utilisateur utilisateur = optionalUtilisateur.get();</span>
+
+        // Parse the registration start date and calculate the date range
+        LocalDate registrationStartDate;
+
+<span class="fc" id="L149">        registrationStartDate = LocalDate.parse(startDate);</span>
+
+
+<span class="fc" id="L152">        LocalDate weekStartDate = registrationStartDate.plusWeeks(weekNumber - 1);</span>
+<span class="fc" id="L153">        LocalDate weekEndDate = weekStartDate.plusDays(6);</span>
+
+        // Adjust for a specific day if provided
+<span class="pc bpc" id="L156" title="1 of 2 branches missed.">        if (day != null) {</span>
+            try {
+<span class="nc" id="L158">                DayOfWeek desiredDay = DayOfWeek.valueOf(day.toUpperCase());</span>
+<span class="nc" id="L159">                weekStartDate = weekStartDate.with(desiredDay);</span>
+<span class="nc" id="L160">                weekEndDate = weekStartDate; // Same date for start and end</span>
+<span class="nc" id="L161">            } catch (IllegalArgumentException e) {</span>
+<span class="nc" id="L162">                return new ResponseEntity&lt;&gt;(HttpStatus.BAD_REQUEST); // Invalid day input</span>
+<span class="nc" id="L163">            }</span>
+        }
+
+        // Fetch plannings within the calculated date range
+<span class="fc" id="L167">        List&lt;Planning&gt; weeklyPlannings = PlanningRepository.findByUtilisateurAndJourBetween(</span>
+                utilisateur,
+<span class="fc" id="L169">                weekStartDate.toString(),</span>
+<span class="fc" id="L170">                weekEndDate.toString()</span>
+        );
+
+
+<span class="fc" id="L174">        List&lt;Repas&gt; weeklyRepas = weeklyPlannings.stream()</span>
+<span class="fc" id="L175">                .flatMap(planning -&gt; planning.getRepass().stream())</span>
+<span class="fc" id="L176">                .collect(Collectors.toList());</span>
+
+<span class="fc" id="L178">        return new ResponseEntity&lt;&gt;(weeklyRepas, HttpStatus.OK);</span>
+    }
+
+
+    @GetMapping(&quot;/{utilisateurId}&quot;)
+    public ResponseEntity&lt;List&lt;ActiviteDTO1&gt;&gt; fetchActivitiesByUtilisateur(@PathVariable Long utilisateurId) {
+        try {
+<span class="nc" id="L185">            List&lt;ActiviteDTO1&gt; activities = planningService.fetchActivitiesByUtilisateur(utilisateurId);</span>
+
+<span class="nc bnc" id="L187" title="All 2 branches missed.">            if (activities.isEmpty()) {</span>
+<span class="nc" id="L188">                return ResponseEntity.noContent().build();</span>
+            }
+
+<span class="nc" id="L191">            return ResponseEntity.ok(activities);</span>
+<span class="fc" id="L192">        } catch (Exception e) {</span>
+<span class="fc" id="L193">            return ResponseEntity.internalServerError().build();</span>
+        }
+    }
+    @GetMapping(&quot;/AllActivities/{utilisateurId}&quot;)
+    public ResponseEntity&lt;List&lt;ActiviteDTO1&gt;&gt; getAllActivities(
+            @PathVariable Long utilisateurId) {
+<span class="fc" id="L199">        List&lt;ActiviteDTO1&gt; activities = planningService.fetchActivitiesByUtilisateur(utilisateurId);</span>
+
+<span class="fc bfc" id="L201" title="All 2 branches covered.">        if (activities.isEmpty()) {</span>
+<span class="fc" id="L202">            return new ResponseEntity&lt;&gt;(HttpStatus.NO_CONTENT); // Return 204 if no content</span>
+        }
+
+<span class="fc" id="L205">        return new ResponseEntity&lt;&gt;(activities, HttpStatus.OK); // Return 200 with data</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

@@ -1,0 +1,36 @@
+
+.com.example.fitfolio.entities.Role#hashCode()I
+uC:/Users/21262/OneDrive/Bureau/5IIR/Projet/POUR TEST 2/fitfolio/src/main/java/com/example/fitfolio/entities/Role.java+ +("1*û
+1,	 ,(t
+r
+, ,(
+%0java.lang.Long"__id*J
+
+__unknown_file (.*,$
+"com.example.fitfolio.entities.Role"
+id|
+z
+, ,("
+%1java.lang.String"__id*P
+
+__unknown_file (4*2$
+"com.example.fitfolio.entities.Role"
+
+roleNameã
+à
+,	 ,(#	
+%2int",java.util.Objects#hash([Ljava/lang/Object;)I*1
+
+__unknown_file ("
+java.util.Objects*2
+
+__unknown_file (
+
+%0java.lang.Long*4
+
+__unknown_file (
+
+%1java.lang.String"
+, ,($
+""B&$
+"com.example.fitfolio.entities.RoleHX

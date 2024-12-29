@@ -1,0 +1,6 @@
+com.example.fitfolio.controllers.RepasController#saveRepas(Lcom/example/fitfolio/entities/Repas;)LResponseEntity;
+false
+6d55ff558ae36956d0cf606db1ce2a8b
+==
+addNewRepas com.example.fitfolio.service.RepasService#addNewRepas(Lcom/example/fitfolio/entities/Repas;)LResponseEntity;
+println java.io.PrintStream#println(Ljava/lang/String;)V

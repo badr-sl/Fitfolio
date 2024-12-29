@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UserService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">fitfolio</a> &gt; <a href="index.source.html" class="el_package">com.example.fitfolio.service</a> &gt; <span class="el_source">UserService.java</span></div><h1>UserService.java</h1><pre class="source lang-java linenums">package com.example.fitfolio.service;
+
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.example.fitfolio.dto.UserDto;
+import com.example.fitfolio.entities.Role;
+import com.example.fitfolio.entities.Utilisateur;
+import com.example.fitfolio.repo.RoleRepository;
+import com.example.fitfolio.repo.UserRepository;
+
+@Service
+@Transactional
+<span class="fc" id="L29">public class UserService implements UserDetailsService {</span>
+
+    @Autowired
+    private UserRepository appUserRepository;
+
+    @Autowired
+    private RoleRepository appRoleRepository;
+
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    public UserDto addNewUser(Utilisateur appUser) {
+<span class="fc" id="L41">        Utilisateur existingUser = appUserRepository.findByUsername(appUser.getUsername());</span>
+<span class="fc" id="L42">        UserDto appUserDto = new UserDto();</span>
+<span class="fc" id="L43">        String rawPassword = appUser.getPassword();</span>
+
+<span class="fc bfc" id="L45" title="All 2 branches covered.">        if (existingUser != null) {</span>
+            // Preserve existing fields if they are not provided in the request
+<span class="fc" id="L47">            appUser.setId(existingUser.getId());</span>
+<span class="fc" id="L48">            appUser.setPassword(</span>
+<span class="pc bpc" id="L49" title="1 of 2 branches missed.">                    rawPassword != null ? bCryptPasswordEncoder.encode(rawPassword) : existingUser.getPassword()</span>
+            );
+<span class="fc" id="L51">            appUser.setRoles(</span>
+<span class="pc bpc" id="L52" title="1 of 4 branches missed.">                    appUser.getRoles() != null &amp;&amp; !appUser.getRoles().isEmpty() ? appUser.getRoles() : existingUser.getRoles()</span>
+            );
+<span class="fc bfc" id="L54" title="All 2 branches covered.">            appUser.setPrenom(appUser.getPrenom() != null ? appUser.getPrenom() : existingUser.getPrenom());</span>
+<span class="fc bfc" id="L55" title="All 2 branches covered.">            appUser.setNom(appUser.getNom() != null ? appUser.getNom() : existingUser.getNom());</span>
+<span class="fc bfc" id="L56" title="All 2 branches covered.">            appUser.setTelephone(appUser.getTelephone() != null ? appUser.getTelephone() : existingUser.getTelephone());</span>
+<span class="fc bfc" id="L57" title="All 2 branches covered.">            appUser.setAge(appUser.getAge() != 0 ? appUser.getAge() : existingUser.getAge());</span>
+<span class="fc bfc" id="L58" title="All 2 branches covered.">            appUser.setPoids(appUser.getPoids() != null ? appUser.getPoids() : existingUser.getPoids());</span>
+<span class="fc bfc" id="L59" title="All 2 branches covered.">            appUser.setTaille(appUser.getTaille() != null ? appUser.getTaille() : existingUser.getTaille());</span>
+<span class="fc bfc" id="L60" title="All 2 branches covered.">            appUser.setSexe(appUser.getSexe() != null ? appUser.getSexe() : existingUser.getSexe());</span>
+<span class="fc bfc" id="L61" title="All 2 branches covered.">            appUser.setObjectif(appUser.getObjectif() != null ? appUser.getObjectif() : existingUser.getObjectif());</span>
+
+<span class="fc" id="L63">            appUserDto.setMessage(&quot;Update performed&quot;);</span>
+        } else {
+            // Encode the password for new user creation
+<span class="fc" id="L66">            appUser.setPassword(bCryptPasswordEncoder.encode(rawPassword));</span>
+<span class="fc" id="L67">            appUserDto.setMessage(&quot;User created&quot;);</span>
+        }
+
+        // Save the user and set the DTO
+<span class="fc" id="L71">        appUserDto.setAppUser(appUserRepository.save(appUser));</span>
+<span class="fc" id="L72">        return appUserDto;</span>
+    }
+
+
+    public Role addNewRole(Role role) {
+<span class="fc" id="L77">        Role existingRole = appRoleRepository.findByRoleName(role.getRoleName());</span>
+<span class="fc bfc" id="L78" title="All 2 branches covered.">        return (existingRole != null) ? existingRole : appRoleRepository.save(role);</span>
+    }
+
+    
+    public void addRoleToUser(String username, String rolename)  { 
+<span class="fc" id="L83">    	System.out.println(&quot;le nom d'utilisateur : &quot; + username+ &quot;rolename&quot;+rolename);</span>
+        
+<span class="fc" id="L85">            Utilisateur appUser = appUserRepository.findByUsername(username);</span>
+<span class="fc bfc" id="L86" title="All 2 branches covered.">            if (appUser == null) {</span>
+<span class="fc" id="L87">                System.out.println(&quot;Utilisateur introuvable avec le nom d'utilisateur : &quot; + username);</span>
+<span class="fc" id="L88">                return ;</span>
+            }
+<span class="fc" id="L90">            Role appRole = appRoleRepository.findByRoleName(rolename);</span>
+<span class="fc bfc" id="L91" title="All 2 branches covered.">            if (appRole == null) {</span>
+<span class="fc" id="L92">                System.out.println(&quot;Rôle introuvable avec le nom : &quot; + rolename);</span>
+<span class="fc" id="L93">                return;</span>
+            }
+
+<span class="fc bfc" id="L96" title="All 2 branches covered.">            if (appUser.getRoles().contains(appRole)) {</span>
+                
+<span class="fc" id="L98">                System.out.println(&quot;L'utilisateur a déjà le rôle : &quot; + rolename+appUser.getRoles()+&quot;::::&quot;);</span>
+                
+<span class="fc" id="L100">                return   ;</span>
+               
+            }
+
+           
+<span class="fc" id="L105">            appUser.getRoles().add(appRole);</span>
+<span class="fc" id="L106">            System.out.println(&quot; L'utilisateur &quot; + username + &quot; a reçu le rôle &quot; + rolename);</span>
+          
+<span class="fc" id="L108">            return ;</span>
+        
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+<span class="fc" id="L114">        Utilisateur appUser = appUserRepository.findByUsername(username);</span>
+<span class="fc" id="L115">        return new User(appUser.getUsername(), appUser.getPassword(), getAuthorities(appUser.getRoles())); // Retourne les détails de l'utilisateur</span>
+    }
+
+
+    public Collection&lt;GrantedAuthority&gt; getAuthorities(Collection&lt;Role&gt; roles) {
+<span class="pc bpc" id="L120" title="1 of 2 branches missed.">        return roles == null ? Collections.emptyList() :</span>
+<span class="fc" id="L121">               roles.stream()</span>
+<span class="fc" id="L122">                    .map(role -&gt; new SimpleGrantedAuthority(role.getRoleName()))</span>
+<span class="fc" id="L123">                    .collect(Collectors.toList());</span>
+    }
+    
+    public List&lt;Utilisateur&gt; listUsers() {
+<span class="fc" id="L127">        return appUserRepository.findAll();</span>
+    }
+
+
+    public Double calculateBMI(Long userId) {
+<span class="fc" id="L132">        Utilisateur user = appUserRepository.findById(userId)</span>
+<span class="pc" id="L133">                        .orElseThrow(() -&gt; new RuntimeException(&quot;User not found with id: &quot; + userId));</span>
+        
+<span class="pc bpc" id="L135" title="2 of 6 branches missed.">        if (user.getTaille() == null || user.getPoids() == null || user.getTaille() == 0) {</span>
+<span class="fc" id="L136">            throw new RuntimeException(&quot;User data for BMI calculation is incomplete.&quot;);</span>
+        }
+    
+        // BMI Formula: weight (kg) / (height (m) * height (m))
+<span class="fc" id="L140">        double heightInMeters = user.getTaille() / 100; // Convert height from cm to meters</span>
+<span class="fc" id="L141">        return user.getPoids() / (heightInMeters * heightInMeters);</span>
+    }
+
+    public ResponseEntity&lt;UserDto&gt; login(String email, String password) {
+<span class="fc" id="L145">        Utilisateur appUser = appUserRepository.findByUsername(email);</span>
+
+        // If user not found
+<span class="fc bfc" id="L148" title="All 2 branches covered.">        if (appUser == null) {</span>
+<span class="fc" id="L149">            UserDto userDto = new UserDto();</span>
+<span class="fc" id="L150">            userDto.setMessage(&quot;User not found with email: &quot; + email);</span>
+<span class="fc" id="L151">            return new ResponseEntity&lt;&gt;(userDto, HttpStatus.UNAUTHORIZED);</span>
+        }
+
+        // Check password
+<span class="fc bfc" id="L155" title="All 2 branches covered.">        if (!bCryptPasswordEncoder.matches(password, appUser.getPassword())) {</span>
+<span class="fc" id="L156">            UserDto userDto = new UserDto();</span>
+<span class="fc" id="L157">            userDto.setMessage(&quot;Invalid password&quot;);</span>
+<span class="fc" id="L158">            return new ResponseEntity&lt;&gt;(userDto, HttpStatus.UNAUTHORIZED);</span>
+        }
+
+        // Create a DTO for the response
+<span class="fc" id="L162">        UserDto userDto = new UserDto();</span>
+<span class="fc" id="L163">        userDto.setMessage(&quot;Login successful&quot;);</span>
+<span class="fc" id="L164">        userDto.setAppUser(appUser);</span>
+<span class="fc" id="L165">        return new ResponseEntity&lt;&gt;(userDto, HttpStatus.OK);</span>
+    }
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

@@ -1,0 +1,17 @@
+com.example.fitfolio.service.PlanningService#calculateDailyCalories(Ljava/lang/Long;Ljava/lang/String;)LResponseEntity;
+false
+eb563e9c6b1fd9f812a1779b285c7f45
+java.util.Optional#get()Ljava/lang/Object;
+java.util.Optional#isEmpty()Z
+java.util.Optional#orElse(Ljava/lang/Object;)Ljava/lang/Object;
+==
+filter java.util.stream.Stream#filter(Ljava/util/function/Predicate;)Ljava/util/stream/Stream;
+findById com.example.fitfolio.repo.UserRepository#findById(Ljava/lang/Long;)Ljava/util/Optional;
+findByJourAndUtilisateur com.example.fitfolio.repo.PlanningRepository#findByJourAndUtilisateur(Ljava/lang/String;Lcom/example/fitfolio/entities/Utilisateur;)Ljava/util/Optional;
+getActivites com.example.fitfolio.entities.Planning#getActivites()Ljava/util/Collection;
+getRepass com.example.fitfolio.entities.Planning#getRepass()Ljava/util/Collection;
+mapToDouble java.util.stream.Stream#mapToDouble(Ljava/util/function/ToDoubleFunction;)Ljava/util/stream/DoubleStream;
+println java.io.PrintStream#println(Ljava/lang/String;)V
+size java.util.Collection#size()I
+stream java.util.Collection#stream()Ljava/util/stream/Stream;
+sum java.util.stream.DoubleStream#sum()D

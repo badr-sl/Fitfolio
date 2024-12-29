@@ -1,0 +1,48 @@
+<div class="sign-in-container">
+  <!-- Section gauche contenant le logo et le texte d'introduction -->
+  <div class="left-section">
+    <!-- Conteneur pour le logo -->
+    <div class="logo">
+      <img src="assets/Logo.png" alt="Fitfolio Logo" />
+    </div>
+    <!-- Conteneur pour le titre et la redirection -->
+    <div class="sign-in-text">
+      <h2>Sign In</h2>
+      <p>If you don’t have an account, you can 
+        <a (click)="navigateToRegister()">Register here!</a>
+      </p>
+    </div>    
+  </div>
+  
+  <!-- Section droite contenant le formulaire -->
+  <div class="right-section">
+    <!-- Titre pour la section du formulaire -->
+    <h2>Welcome Back</h2>
+    <!-- Formulaire de connexion -->
+    <form class="form">
+      <!-- Groupe de saisie pour le champ email -->
+      <div class="input-group">
+        <input type="text" placeholder="Email" [(ngModel)]="email" name="email" required />
+      </div>
+      <!-- Groupe de saisie pour le champ mot de passe avec un bouton de basculement -->
+      <div class="input-group password-group">
+        <input [type]="isPasswordVisible ? 'text' : 'password'" [(ngModel)]="password" name="password" placeholder="Password" required />
+        <!-- Bouton pour basculer la visibilité du mot de passe -->
+        <button type="button" class="toggle-password" (click)="togglePasswordVisibility()">
+          <span>{{ isPasswordVisible ? '🙉' : '🙈' }}</span> <!-- L'icône change selon la visibilité du mot de passe -->
+        </button>
+      </div>
+      <!-- Bouton de soumission pour le formulaire -->
+      <button type="submit" class="sign-in-btn" (click)="SignIn()">Sign In</button>
+    
+    </form>
+    <div id="successMessageDiv" *ngIf="successMessage">
+      {{ successMessage }}
+    </div>
+  
+    <!-- Error Message -->
+    <div id="errorMessageDiv" *ngIf="errorMessage" style="color: red;">
+      {{ errorMessage }}
+    </div>
+  </div>
+</div>

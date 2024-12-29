@@ -1,0 +1,5 @@
+com.example.fitfolio.controllers.PlanningController#savePlanning(Lcom/example/fitfolio/entities/Planning;)LResponseEntity;
+false
+0b83526a9668262186bab5cd41d6fd17
+==
+addNewPlanning com.example.fitfolio.service.PlanningService#addNewPlanning(Lcom/example/fitfolio/entities/Planning;)LResponseEntity;

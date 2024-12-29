@@ -1,0 +1,28 @@
+com.example.fitfolio.service.PlanningService#addActivitesToPlanning(Ljava/lang/String;Ljava/lang/Long;Ljava/util/List;)LResponseEntity;
+false
+41a7647284bde5509fe6ebc3d8451588
+com.example.fitfolio.dto.PlanningDto#<init>()V
+com.example.fitfolio.dto.PlanningDto#instance-init#
+com.example.fitfolio.entities.Planning#<init>()V
+com.example.fitfolio.entities.Planning#instance-init#
+java.util.ArrayList#<init>()V
+java.util.ArrayList#instance-init#
+java.util.Optional#get()Ljava/lang/Object;
+java.util.Optional#isEmpty()Z
+java.util.Optional#isPresent()Z
+java.util.Optional#orElse(Ljava/lang/Object;)Ljava/lang/Object;
+==
+!unknownMethod! !unknownMethod!
+add java.util.List#add(Ljava/lang/Object;)Z
+addAll java.util.Collection#addAll(Ljava/util/Collection;)Z
+findById com.example.fitfolio.repo.UserRepository#findById(Ljava/lang/Long;)Ljava/util/Optional;
+findByJourAndUtilisateur com.example.fitfolio.repo.PlanningRepository#findByJourAndUtilisateur(Ljava/lang/String;Lcom/example/fitfolio/entities/Utilisateur;)Ljava/util/Optional;
+getActivites com.example.fitfolio.entities.Planning#getActivites()Ljava/util/Collection;
+getId com.example.fitfolio.entities.Activite#getId()Ljava/lang/Long;
+setActivites com.example.fitfolio.entities.Planning#setActivites(Ljava/util/Collection;)V
+setCode com.example.fitfolio.entities.Planning#setCode(Ljava/lang/String;)V
+setJour com.example.fitfolio.entities.Planning#setJour(Ljava/lang/String;)V
+setMessage com.example.fitfolio.dto.PlanningDto#setMessage(Ljava/lang/String;)V
+setPlanning com.example.fitfolio.dto.PlanningDto#setPlanning(Lcom/example/fitfolio/entities/Planning;)V
+setRepass com.example.fitfolio.entities.Planning#setRepass(Ljava/util/Collection;)V
+setUtilisateur com.example.fitfolio.entities.Planning#setUtilisateur(Lcom/example/fitfolio/entities/Utilisateur;)V

@@ -1,0 +1,74 @@
+<!-- Conteneur principal de l'application -->
+<div class="training-container">
+
+  <!-- En-tête de la page -->
+  <div class="header-text">
+    <h1>Choose a training for today 🔥</h1> 
+    <p class="subtitle">TOO MUCH PROTEIN? NO WHEY, MATE.</p> 
+  </div>
+  
+  <!-- Cercles représentant les activités disponibles -->
+  <div class="activity-circles">
+    <!-- Conteneur pour itérer sur les activités avec *ngFor -->
+    <ng-container *ngFor="let activity of activities">
+      <div
+        class="activity-circle" 
+        [ngClass]="{'selected': selectedActivity?.titre === activity.titre}" 
+        *ngIf="!isActivityConfirmed || selectedActivity?.titre === activity.titre" 
+        (click)="selectActivity(activity)" 
+      >
+        <img [src]="activity.image" alt="{{ activity.titre }}" (error)="onImageError($event)" /> 
+        <!-- Affiche l'icône de l'activité -->
+      </div>
+    </ng-container>
+  </div>
+  
+  <!-- Section des détails de l'activité -->
+  <div class="activity-details">
+    <!-- Affiche les détails de l'activité si elle n'est pas encore confirmée -->
+    <div class="content" *ngIf="!isActivityConfirmed; else confirmedActivity">
+      <h2>{{ selectedActivity?.titre }}</h2> <!-- Nom de l'activité -->
+      <p>{{ selectedActivity?.description }}</p> <!-- Description de l'activité -->
+      <button class="start-btn">{{ selectedActivity?.speed }}</button> <!-- Vitesse ou répétitions -->
+      <button class="select-btn" id="Btn1" (click)="selection()">Select</button> <!-- Bouton pour confirmer l'activité -->
+    </div>
+  
+    <!-- Modèle pour afficher l'activité confirmée -->
+    <ng-template #confirmedActivity>
+      <div class="content">
+        <h2>Your activity of the day</h2> <!-- Message de confirmation -->
+        <p class="start-btn">{{ selectedActivity?.titre }}</p> <!-- Nom de l'activité -->
+        <p>{{ selectedActivity?.description }}</p> <!-- Description -->
+        <p><strong>Speed:</strong> {{ selectedActivity?.speed }}</p> <!-- Vitesse ou répétitions -->
+        <p><strong>Calories:</strong> {{ selectedActivity?.nbrcalories }} kcal</p> <!-- Calories brûlées -->
+        <button class="select-btn" (click)="confirmSelection()">Confirm Activity</button> <!-- Bouton pour confirmer l'activité -->
+      </div>
+    </ng-template>
+  </div>  
+  
+  <div id="successMessageDiv" *ngIf="successMessage" style="display: green;">
+    {{ successMessage }}
+  </div>
+  
+  <div id="errorMessageDiv" *ngIf="errorMessage" style="color: red;">
+    {{ errorMessage }}
+  </div>
+  
+  
+  <div class="history-section">
+   
+    <h2>Past Activities</h2> <!-- Section Title -->
+    <div class="past-activity" *ngFor="let past of pastActivities">
+      <div class="past-info">
+        <h3>{{ past.titre }}</h3> <!-- Activity Title -->
+        <p>{{ past.date }}</p> <!-- Date -->
+        <p>{{ past.description }}</p> <!-- Description -->
+      </div>
+      <img [src]="past.image" alt="{{ past.titre }}" class="past-icon" /> <!-- Activity Icon -->
+    </div>
+  </div>
+  <div *ngIf="pastActivities.length === 0" class="no-activities-message" style="color: gray;">
+    No past activities yet.
+  </div>
+
+</div>

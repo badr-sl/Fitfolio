@@ -1,0 +1,6 @@
+com.example.fitfolio.controllers.ActiviteController#deleteActivite(Ljava/lang/Long;)LResponseEntity;
+false
+cc168244dc3fb5557bd9454764cdb6fc
+==
+deleteActivite com.example.fitfolio.service.ActiviteService#deleteActivite(Ljava/lang/Long;)LResponseEntity;
+println java.io.PrintStream#println(Ljava/lang/String;)V

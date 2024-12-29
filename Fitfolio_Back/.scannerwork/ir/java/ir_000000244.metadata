@@ -1,0 +1,5 @@
+com.example.fitfolio.controllers.PlanningController#addRepasToPlanning(Ljava/lang/String;Ljava/lang/Long;Ljava/util/List;)LResponseEntity;
+false
+4f9ac69bdf845b75efa0ca4ac94426e7
+==
+addRepasToPlanning com.example.fitfolio.service.PlanningService#addRepasToPlanning(Ljava/lang/String;Ljava/lang/Long;Ljava/util/List;)LResponseEntity;

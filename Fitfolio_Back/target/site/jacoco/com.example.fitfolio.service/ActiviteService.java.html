@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ActiviteService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">fitfolio</a> &gt; <a href="index.source.html" class="el_package">com.example.fitfolio.service</a> &gt; <span class="el_source">ActiviteService.java</span></div><h1>ActiviteService.java</h1><pre class="source lang-java linenums">package com.example.fitfolio.service;
+
+import java.util.List;
+import java.util.Optional;
+
+import com.example.fitfolio.dto.ActiviteDto;
+import com.example.fitfolio.entities.Planning;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import com.example.fitfolio.entities.Activite;
+import com.example.fitfolio.repo.ActiviteRepository;
+import com.example.fitfolio.repo.PlanningRepository;
+@Service
+@Transactional
+<span class="fc" id="L18">public class ActiviteService {</span>
+
+    @Autowired
+    private ActiviteRepository ActiviteRepository;
+
+    @Autowired
+    private PlanningRepository planningRepository;
+    // Sauvegarde ou update Activite par titre
+    public ResponseEntity&lt;ActiviteDto&gt; addNewActivite(Activite repas) {
+<span class="fc" id="L27">    	System.out.println(&quot;entree addnewActivite one&quot;);</span>
+<span class="fc" id="L28">    System.out.println(&quot;entree addnewActivite&quot;+repas);</span>
+<span class="fc" id="L29">        Activite existingActivite = ActiviteRepository.findByTitre(repas.getTitre());</span>
+<span class="fc" id="L30">        System.out.println(&quot;entree addnewActivite&quot;+existingActivite);</span>
+<span class="fc" id="L31">        ActiviteDto ActiviteDto=new ActiviteDto();</span>
+<span class="fc bfc" id="L32" title="All 2 branches covered.">        if (existingActivite != null) {</span>
+        	
+<span class="fc" id="L34">        	repas.setId(existingActivite.getId());</span>
+<span class="fc" id="L35">        	ActiviteDto.setActivite(ActiviteRepository.save(repas) );</span>
+        	
+<span class="fc" id="L37">        	ActiviteDto.setMessage(&quot;Modification effectuer&quot;);</span>
+<span class="fc" id="L38">        	ActiviteDto.setActivite(repas);</span>
+        	
+<span class="fc" id="L40">            return new ResponseEntity&lt;&gt;(ActiviteDto, HttpStatus.OK); </span>
+                                 }
+        
+<span class="fc" id="L43">        ActiviteDto.setActivite(ActiviteRepository.save(repas) );</span>
+<span class="fc" id="L44">    	ActiviteDto.setMessage(&quot;Creation Effectuer &quot;);</span>
+<span class="fc" id="L45">        return new ResponseEntity&lt;&gt;(ActiviteDto, HttpStatus.CREATED);</span>
+    }
+
+
+    public Activite chercheActivite(String titre) {
+<span class="fc" id="L50">        return ActiviteRepository.findByTitre(titre); // Retourne l'utilisateur</span>
+    }
+
+
+    public List&lt;Activite&gt; listAllActivites() {
+<span class="fc" id="L55">        return ActiviteRepository.findAll();</span>
+    }
+
+    // Fetch activities filtered by objectif
+    public List&lt;Activite&gt; listActivitesByGoal(String objectif) {
+<span class="fc" id="L60">        return ActiviteRepository.findByObjectif(objectif);</span>
+    }
+
+
+    public ResponseEntity&lt;String&gt; deleteActivite(Long id) {
+        // Vérifier si l'Activité existe
+<span class="fc" id="L66">        Optional&lt;Activite&gt; activiteOptional = ActiviteRepository.findById(id);</span>
+
+<span class="fc bfc" id="L68" title="All 2 branches covered.">        if (activiteOptional.isPresent()) {</span>
+<span class="fc" id="L69">            Activite activite = activiteOptional.get();</span>
+
+            // On récupère tous les Plannings qui contiennent cette Activité
+<span class="fc" id="L72">            List&lt;Planning&gt; plannings = planningRepository.findAll();</span>
+
+<span class="fc bfc" id="L74" title="All 2 branches covered.">            for (Planning planning : plannings) {</span>
+                // Si le Planning contient l'Activité, on la retire
+<span class="pc bpc" id="L76" title="1 of 2 branches missed.">                if (planning.getActivites().contains(activite)) {</span>
+<span class="fc" id="L77">                    planning.getActivites().remove(activite);</span>
+<span class="fc" id="L78">                    planningRepository.save(planning);</span>
+                }
+<span class="fc" id="L80">            }</span>
+
+            // Supprimer l'Activité de la base de données
+<span class="fc" id="L83">            ActiviteRepository.delete(activite);</span>
+<span class="fc" id="L84">            return new ResponseEntity&lt;&gt;(&quot;Activité supprimée avec succès&quot;, HttpStatus.OK);</span>
+        } else {
+<span class="fc" id="L86">            return new ResponseEntity&lt;&gt;(&quot;Activité introuvable&quot;, HttpStatus.NOT_FOUND);</span>
+        }
+    }
+
+}
+
+
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

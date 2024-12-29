@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SecurityConfig.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">fitfolio</a> &gt; <a href="index.source.html" class="el_package">com.example.fitfolio.config</a> &gt; <span class="el_source">SecurityConfig.java</span></div><h1>SecurityConfig.java</h1><pre class="source lang-java linenums">package com.example.fitfolio.config;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+import com.example.fitfolio.component.JwtUtil;
+import com.example.fitfolio.service.UserService;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import java.util.List;
+
+@Configuration
+@EnableWebSecurity
+public class SecurityConfig {
+    private final UserService accountService; // Service for managing user accounts
+    private final JwtUtil jwtUtil;
+    private final UserService userService;
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    // Constructor to inject AccountService
+<span class="fc" id="L36">    public SecurityConfig(UserService accountService, UserService userService, JwtUtil jwtUtil) {</span>
+<span class="fc" id="L37">        this.accountService = accountService;</span>
+<span class="fc" id="L38">        this.userService = userService;</span>
+<span class="fc" id="L39">        this.jwtUtil = jwtUtil;</span>
+<span class="fc" id="L40">    }</span>
+
+    // Bean for UserDetailsService, which loads user details by username
+    @Bean
+    UserDetailsService userDetailsService() {
+<span class="pc" id="L45">        return username -&gt; accountService.loadUserByUsername(username); // Load user via AccountService</span>
+    }
+
+
+    // Bean for AuthenticationManager, which handles user authentication
+    @Bean
+    AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
+<span class="fc" id="L52">        return config.getAuthenticationManager(); // Retrieve the authentication manager</span>
+    }
+
+
+
+    // Bean for AuthenticationProvider, providing the authentication implementation
+    @Bean
+    AuthenticationProvider authenticationProvider() {
+<span class="fc" id="L60">        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider(); // Create an authentication provider</span>
+<span class="fc" id="L61">        authProvider.setUserDetailsService(userDetailsService()); // Set the user details service</span>
+<span class="fc" id="L62">        authProvider.setPasswordEncoder(bCryptPasswordEncoder);</span>
+        //authProvider.setPasswordEncoder(passwordEncoder()); // Set the password encoder
+<span class="fc" id="L64">        return authProvider; // Return the configured provider</span>
+    }
+
+    // Bean for configuring the security filter chain
+    @Bean
+    SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+<span class="fc" id="L70">        http.csrf(csrf -&gt; csrf.disable()); // Disable CSRF</span>
+<span class="fc" id="L71">        http.cors(cors -&gt; cors.configurationSource(corsConfigurationSource())); // Enable CORS</span>
+<span class="fc" id="L72">        http.authorizeHttpRequests(authz -&gt; authz</span>
+<span class="fc" id="L73">                .anyRequest().permitAll() // Allow all requests</span>
+        );
+
+<span class="fc" id="L76">        return http.build();</span>
+    }
+
+    @Bean
+    CorsConfigurationSource corsConfigurationSource() {
+<span class="fc" id="L81">        CorsConfiguration configuration = new CorsConfiguration();</span>
+<span class="fc" id="L82">        configuration.setAllowedOrigins(List.of(&quot;http://localhost:4200&quot;)); // Allow frontend origin</span>
+<span class="fc" id="L83">        configuration.setAllowedMethods(List.of(&quot;GET&quot;, &quot;POST&quot;, &quot;PUT&quot;, &quot;DELETE&quot;, &quot;OPTIONS&quot;)); // Allow HTTP methods</span>
+<span class="fc" id="L84">        configuration.setAllowedHeaders(List.of(&quot;*&quot;)); // Allow all headers</span>
+<span class="fc" id="L85">        configuration.setAllowCredentials(true); // Allow cookies and credentials</span>
+
+<span class="fc" id="L87">        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();</span>
+<span class="fc" id="L88">        source.registerCorsConfiguration(&quot;/**&quot;, configuration); // Apply CORS settings to all endpoints</span>
+<span class="fc" id="L89">        return source;</span>
+    }
+}
+
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

@@ -1,0 +1,11 @@
+com.example.fitfolio.service.UserService#login(Ljava/lang/String;Ljava/lang/String;)LResponseEntity;
+false
+48b5921fd47b956c8bf61888976d48d7
+com.example.fitfolio.dto.UserDto#<init>()V
+com.example.fitfolio.dto.UserDto#instance-init#
+==
+!unknownMethod! !unknownMethod!
+findByUsername com.example.fitfolio.repo.UserRepository#findByUsername(Ljava/lang/String;)Lcom/example/fitfolio/entities/Utilisateur;
+getPassword com.example.fitfolio.entities.Utilisateur#getPassword()Ljava/lang/String;
+setAppUser com.example.fitfolio.dto.UserDto#setAppUser(Lcom/example/fitfolio/entities/Utilisateur;)V
+setMessage com.example.fitfolio.dto.UserDto#setMessage(Ljava/lang/String;)V

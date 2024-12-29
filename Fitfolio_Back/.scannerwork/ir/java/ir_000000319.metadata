@@ -1,0 +1,6 @@
+com.example.fitfolio.config.SecurityConfig#authenticationProvider()LAuthenticationProvider;
+false
+e053469ffaeed51616afa02898882bc6
+==
+!unknownMethod! !unknownMethod!
+userDetailsService com.example.fitfolio.config.SecurityConfig#userDetailsService()LUserDetailsService;

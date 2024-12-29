@@ -1,0 +1,6 @@
+com.example.fitfolio.controllers.ActiviteController#saveActivite(Lcom/example/fitfolio/entities/Activite;)LResponseEntity;
+false
+d436088e079cbf0743b2d4788091d0f3
+==
+addNewActivite com.example.fitfolio.service.ActiviteService#addNewActivite(Lcom/example/fitfolio/entities/Activite;)LResponseEntity;
+println java.io.PrintStream#println(Ljava/lang/String;)V

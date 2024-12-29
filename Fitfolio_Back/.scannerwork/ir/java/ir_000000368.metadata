@@ -1,0 +1,14 @@
+com.example.fitfolio.service.ActiviteService#addNewActivite(Lcom/example/fitfolio/entities/Activite;)LResponseEntity;
+false
+4b4f48d06d8282e139a2dbd690153237
+com.example.fitfolio.dto.ActiviteDto#<init>()V
+com.example.fitfolio.dto.ActiviteDto#instance-init#
+==
+!unknownMethod! !unknownMethod!
+findByTitre com.example.fitfolio.repo.ActiviteRepository#findByTitre(Ljava/lang/String;)Lcom/example/fitfolio/entities/Activite;
+getId com.example.fitfolio.entities.Activite#getId()Ljava/lang/Long;
+getTitre com.example.fitfolio.entities.Activite#getTitre()Ljava/lang/String;
+println java.io.PrintStream#println(Ljava/lang/String;)V
+setActivite com.example.fitfolio.dto.ActiviteDto#setActivite(Lcom/example/fitfolio/entities/Activite;)V
+setId com.example.fitfolio.entities.Activite#setId(Ljava/lang/Long;)V
+setMessage com.example.fitfolio.dto.ActiviteDto#setMessage(Ljava/lang/String;)V

@@ -1,0 +1,14 @@
+com.example.fitfolio.service.RepasService#addNewRepas(Lcom/example/fitfolio/entities/Repas;)LResponseEntity;
+false
+d7dee4d8adaaeadd547a8e677f0f0bfb
+com.example.fitfolio.dto.RepasDto#<init>()V
+com.example.fitfolio.dto.RepasDto#instance-init#
+==
+!unknownMethod! !unknownMethod!
+findByTitre com.example.fitfolio.repo.RepasRepository#findByTitre(Ljava/lang/String;)Lcom/example/fitfolio/entities/Repas;
+getId com.example.fitfolio.entities.Repas#getId()Ljava/lang/Long;
+getTitre com.example.fitfolio.entities.Repas#getTitre()Ljava/lang/String;
+println java.io.PrintStream#println(Ljava/lang/String;)V
+setId com.example.fitfolio.entities.Repas#setId(Ljava/lang/Long;)V
+setMessage com.example.fitfolio.dto.RepasDto#setMessage(Ljava/lang/String;)V
+setRepas com.example.fitfolio.dto.RepasDto#setRepas(Lcom/example/fitfolio/entities/Repas;)V

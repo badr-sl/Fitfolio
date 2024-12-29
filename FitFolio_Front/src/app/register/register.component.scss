@@ -1,0 +1,180 @@
+.register-container {
+  display: flex; /* Affiche les sections en flex pour les organiser horizontalement */
+  width: 100%; /* Prend toute la largeur de l'écran */
+  height: 100vh; /* Prend toute la hauteur de la fenêtre */
+  background-color: #f9f9fc; /* Couleur de fond gris clair */
+  border-radius: 16px; /* Coins arrondis */
+  overflow: hidden; /* Cache le contenu qui dépasse */
+}
+
+.left-section {
+  flex: 1; /* Prend un espace égal à la section de droite */
+  display: flex; /* Utilise flexbox pour organiser le contenu */
+  flex-direction: column; /* Dispose le contenu verticalement */
+  justify-content: center; /* Centre verticalement le contenu */
+  padding: 30px 60px; /* Ajoute un espacement intérieur */
+  background-color: #f9f9fc; /* Couleur de fond de la section */
+  position: relative; /* Nécessaire pour positionner l'élément ::before */
+}
+
+.logo {
+  position: absolute; /* Positionne le logo par rapport à la section */
+  top: 10px; /* Distance du haut de la section */
+  left: 10px; /* Distance du côté gauche */
+}
+
+/* Image du logo */
+.logo img {
+  width: 150px; /* Largeur de l'image du logo */
+}
+
+.register-text {
+  position: relative; /* Pour la superposition correcte */
+  z-index: 2; /* Met le texte au-dessus des autres éléments */
+  text-align: left; /* Aligne le texte à gauche */
+  margin-left: 300px; /* Décale le texte vers la droite */
+  max-width: 200px; /* Limite la largeur du conteneur */
+}
+
+.register-text h2 {
+  font-size: 36px; /* Taille de la police */
+  font-weight: bold; /* Texte en gras */
+  margin-bottom: 5px; /* Espace sous le titre */
+  color: #000000; /* Couleur noire */
+}
+
+.register-text p {
+  font-size: 16px; /* Taille de la police */
+  margin-top: 5px; /* Espace au-dessus du paragraphe */
+}
+
+.left-section::before {
+  content: ''; /* Crée un élément vide */
+  position: absolute; /* Position absolue dans la section */
+  top: 0; /* En haut de la section */
+  left: 0; /* À gauche de la section */
+  width: 100%; /* Largeur complète */
+  height: 100%; /* Hauteur complète */
+  background: radial-gradient(rgba(40, 178, 247, 0.5), transparent 70%); /* Gradient bleu clair */
+  z-index: 1; /* Derrière le contenu */
+  pointer-events: none; /* Permet aux clics de passer à travers */
+}
+
+/* Style des paragraphes dans la section gauche */
+.left-section p {
+  font-size: 14px; /* Taille de la police */
+  line-height: 1.5; /* Espacement entre les lignes */
+  margin-top: 5px; /* Espace au-dessus */
+}
+
+/* Style des liens dans la section gauche */
+.left-section a {
+  cursor: pointer; /* Change le curseur en pointeur */
+  position: relative; /* Pour la superposition */
+  z-index: 3; /* S'assure que le lien est au-dessus des autres éléments */
+  color: #007acc; /* Couleur bleue */
+  text-decoration: none; /* Supprime le soulignement */
+  pointer-events: auto; /* Permet l'interaction */
+}
+
+/* Section droite pour le formulaire */
+.right-section {
+  flex: 1; /* Occupe un espace égal à la section gauche */
+  display: flex; /* Utilise flexbox */
+  flex-direction: column; /* Dispose le contenu verticalement */
+  justify-content: center; /* Centre verticalement le contenu */
+  align-items: flex-start; /* Aligne le contenu à gauche */
+  padding: 20px 40px; /* Espacement intérieur */
+}
+
+.right-section h2 {
+  font-size: 30px; /* Taille de la police */
+  font-weight: bold; /* Texte en gras */
+  margin-bottom: 30px; /* Espace sous le titre */
+  margin-left: 150px; /* Décale le titre vers la droite */
+}
+
+/* Style des groupes de champs */
+.input-group,
+.input-group-row {
+  width: 100%; /* Largeur complète */
+  display: flex; /* Utilise flexbox */
+  gap: 10px; /* Espace entre les champs */
+  margin-bottom: 15px; /* Espace en bas */
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="password"],
+input[type="number"] {
+  width: 100%; /* Largeur complète */
+  padding: 12px; /* Espacement intérieur */
+  border: 1px solid #d1d9e6; /* Bordure grise */
+  border-radius: 8px; /* Coins arrondis */
+  background-color: #f3f6fc; /* Couleur de fond */
+  font-size: 16px; /* Taille de la police */
+}
+
+/* Style pour l'élément select */
+select {
+  width: 100%; /* Largeur complète */
+  padding: 5px; /* Espacement intérieur */
+  padding-right: 30px; /* Espacement supplémentaire à droite pour l'icône */
+  border: 1px solid #d1d9e6; /* Bordure */
+  border-radius: 8px; /* Coins arrondis */
+  background-color: #f3f6fc; /* Couleur de fond */
+  font-size: 16px; /* Taille de la police */
+  color: #000000; /* Couleur du texte */
+  outline: none; /* Supprime l'outline par défaut */
+}
+
+/* Style pour l'option par défaut */
+select:invalid {
+  color: #6b7484; /* Couleur grise pour le placeholder */
+}
+
+/* Style des options sélectionnées */
+select option {
+  color: #000000; /* Couleur du texte */
+}
+
+/* Groupe de mot de passe */
+.password-group {
+  position: relative; /* Permet de positionner l'icône */
+  display: flex; /* Flexbox pour l'alignement */
+  align-items: center; /* Centre le contenu verticalement */
+}
+
+/* Bouton de bascule de visibilité du mot de passe */
+.toggle-password {
+  position: absolute; /* Position absolue */
+  right: 10px; /* Distance de la droite */
+  top: 50%; /* Centré verticalement */
+  transform: translateY(-50%); /* Ajustement vertical */
+  background: none; /* Pas de fond */
+  border: none; /* Pas de bordure */
+  cursor: pointer; /* Curseur en pointeur */
+  color: #7a869a; /* Couleur par défaut */
+  font-size: 20px; /* Taille de l'icône */
+  padding: 0; /* Pas de remplissage */
+  outline: none; /* Supprime l'outline de focus */
+}
+
+/* Bouton de soumission */
+.sign-in-btn {
+  background-color: #007acc; /* Couleur de fond */
+  color: #ffffff; /* Couleur du texte */
+  width: 100%; /* Largeur complète */
+  padding: 15px; /* Espacement intérieur */
+  border: none; /* Pas de bordure */
+  border-radius: 8px; /* Coins arrondis */
+  cursor: pointer; /* Curseur en pointeur */
+  font-size: 18px; /* Taille de la police */
+  margin-top: 20px; /* Espace au-dessus */
+}
+
+/* Effet au survol du bouton */
+.sign-in-btn:hover {
+  background-color: #005f99; /* Couleur bleue plus foncée */
+}

@@ -1,0 +1,5 @@
+com.example.fitfolio.controllers.PlanningController#addActivitesToPlanning(Ljava/lang/String;Ljava/lang/Long;Ljava/util/List;)LResponseEntity;
+false
+82f0b9b88e8092cb08166022d6f44870
+==
+addActivitesToPlanning com.example.fitfolio.service.PlanningService#addActivitesToPlanning(Ljava/lang/String;Ljava/lang/Long;Ljava/util/List;)LResponseEntity;

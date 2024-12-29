@@ -1,0 +1,5 @@
+com.example.fitfolio.service.ActiviteService#chercheActivite(Ljava/lang/String;)Lcom/example/fitfolio/entities/Activite;
+false
+17f160c1efa915e3907e46e9af4dd808
+==
+findByTitre com.example.fitfolio.repo.ActiviteRepository#findByTitre(Ljava/lang/String;)Lcom/example/fitfolio/entities/Activite;

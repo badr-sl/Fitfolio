@@ -1,0 +1,533 @@
+/* Root container for the Personal Meal Plan */
+.meal-plan-container {
+  font-family: 'Arial', sans-serif;
+  margin: 40px auto;
+  max-width: 1200px;
+  padding: 20px;
+}
+
+/* Header Section */
+.meal-plan-header {
+  margin-bottom: 20px;
+}
+
+.meal-plan-header h2 {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #333;
+  margin-left: 5%;
+}
+
+/* Filters Section */
+.meal-plan-filters {
+  display: flex;
+  justify-content: space-between; /* Align filters on the left, button on the right */
+  align-items: center;
+  padding: 0 5%; /* Add consistent padding for alignment */
+  gap: 20px; /* Space between dropdowns */
+}
+
+.filters-wrapper {
+  display: flex;
+  gap: 20px; /* Spacing between dropdowns */
+}
+
+/* Dropdowns */
+.dropdown {
+  position: relative;
+}
+
+.dropdown-select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: none;
+  border: none;
+  border-bottom: 1px solid #b3b3b3;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #6b6b6b;
+  padding: 5px 0;
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+  width: 130px; /* Fixed width for dropdowns */
+}
+
+.dropdown-select:focus {
+  outline: none;
+  border-color: #333;
+}
+
+/* Dropdown Arrow */
+.dropdown-arrow {
+  position: absolute;
+  right: 10px;
+  pointer-events: none;
+  color: #6b6b6b;
+  font-size: 0.8rem;
+  transform: translateY(-50%);
+  top: 50%;
+}
+
+/* Add Plan Button */
+.add-plan-btn {
+  background-color: transparent;
+  color: #2c2c2c;
+  border: 1px solid #b3b3b3;
+  padding: 8px 20px;
+  border-radius: 20px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.add-plan-btn:hover {
+  background-color: #f4f4f4;
+  border-color: #2c2c2c;
+  color: #333;
+}
+
+/* Meal Grid */
+.meal-grid {
+  margin-top: 30px;
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center; /* Center-align cards */
+}
+
+.meal-card {
+  position: relative;
+  width: 250px;
+  height: 330px;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.meal-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1));
+  z-index: 1;
+  pointer-events: none; /* Ensures it doesn't block interactions */
+}
+
+.meal-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Meal Image */
+.meal-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.meal-card:hover img {
+  transform: scale(1.05);
+}
+
+.meal-card-overlay-top {
+  position: absolute;
+  top: 10px;
+  left: 15px;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  font-weight: bold;
+  z-index: 2; /* Above the gradient overlay */
+}
+
+/* Bottom Overlay (Meal Title) */
+.meal-card-overlay-bottom {
+  position: absolute;
+  bottom: 10px;
+  left: 15px;
+  color: white;
+  font-size: 1.1rem;
+  font-weight: bold;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+  z-index: 2; /* Above the gradient overlay */
+}
+
+.meal-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+.meal-modal-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.meal-modal-content {
+  position: relative;
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  z-index: 1001;
+}
+
+.close-modal-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: #333;
+  cursor: pointer;
+}
+
+.meal-modal-meal-image {
+  width: 100%;
+  height: auto;
+  margin: 20px 0;
+}
+
+.meal-modal-content h2 {
+  margin: 10px 0;
+  font-size: 20px;
+  color: #333;
+}
+
+.meal-modal-content p {
+  margin: 5px 0;
+  font-size: 14px;
+  color: #555;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*Modal*/
+/* Modal Overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh; /* Full viewport height */
+  background: rgba(0, 0, 0, 0.5); /* Dim background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+
+.modal-content {
+  padding: 70px 30px 70px 30px;
+  background: white;
+  width: 100%; /* Adjust as needed */
+  max-width: 100%;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-height: 100vh; /* Ensures the modal never exceeds the viewport */
+  overflow: hidden; /* Prevent the entire modal from scrolling */
+}
+
+.modal-body {
+  display: flex;
+  gap: 20px;
+  flex: 1; /* Ensure children (meal options & meal info) grow proportionally */
+  overflow: hidden; /* Prevent unnecessary overflow */
+}
+
+
+/* Meal Options Section */
+.meal-options {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Meal Section */
+.meal-section h4 {
+  margin-bottom: 10px;
+}
+
+.meal-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.meal-name-btn {
+  padding: 10px 15px;
+  border: 1px solid #ddd;
+  background: #f9f9f9;
+  border-radius: 100px;
+  cursor: pointer;
+  transition: background 0.3s, border-color 0.3s;
+  font-size: 0.9rem;
+}
+
+.meal-name-btn.selected {
+  background: #5a90b7;
+  color: white;
+  background: #5a90b7;
+}
+
+.meal-name-btn:hover {
+  background: #e0e0e0;
+}
+
+/* Meal Info Section */
+.meal-info {
+  flex: 1.5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden; /* Prevent overflow outside the container */
+  text-align: center;
+  height: 100%; /* Full height for the container */
+}
+
+/* Wrapper for the Image and Scrollable Details */
+.meal-image-wrapper {
+  position: relative;
+  width: 450px;
+  height: 450px;
+  overflow-y: auto; /* Enable vertical scrolling only */
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Fixed Meal Image */
+.meal-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensure consistent dimensions */
+  position: sticky; /* Sticky to its parent */
+  top: 0; /* Sticks to the top of the container during scroll */
+  z-index: 1; /* Ensure it stays behind the details */
+  pointer-events: none; /* Prevent interaction blocking */
+}
+/* Hide the Scrollbar */
+.meal-image-wrapper::-webkit-scrollbar {
+  display: none; /* Hide scrollbar for Webkit-based browsers (Chrome, Safari) */
+}
+
+.meal-image-wrapper {
+  -ms-overflow-style: none; /* Hide scrollbar for Internet Explorer and Edge */
+  scrollbar-width: none; /* Hide scrollbar for Firefox */
+}
+/* Scrollable Details (Appearing Over the Image) */
+.meal-details {
+  margin-top: -65px;
+  position: relative;
+  z-index: 2; /* Place the text above the image */
+  padding: 20px;
+  font-size: 1rem;
+  color: white;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.7); /* Enhance text readability */
+  width: 100%; /* Prevent horizontal overflow */
+  background-image: linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.1),rgba(0, 0, 0, 0)); /* Transparent so the image remains visible */
+  box-sizing: border-box; /* Include padding in width calculations */
+}
+
+.meal-details h3 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.meal-details p {
+  margin: 10px 0;
+  line-height: 1.5;
+}
+
+
+.meal-placeholder {
+  color: #888;
+  font-size: 1rem;
+}
+
+/* Additional Details */
+.additional-details {
+  margin-top: 20px;
+  padding-top: 10px;
+  border-top: 1px solid #ddd;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.3s ease, transform 0.3s ease; /* Smooth transition */
+}
+
+.additional-details.show {
+  opacity: 1; /* Fully visible */
+  transform: translateY(0); /* Slide up */
+}
+
+
+
+
+
+
+/* Days Navigation */
+.days-navigation {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.days-navigation button {
+  padding: 10px 15px;
+  border: none;
+  background: none;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-right: 5px;
+  border-radius: 100px;
+  transition: background 0.3s;
+}
+
+.days-navigation button.active {
+  background: #5a90b7;
+  color: white;
+  font-weight: bold;
+}
+
+.days-navigation button:hover {
+  background: #c0cbf2;
+}
+
+/* Save Button */
+.save-btn {
+  background: #5a90b7;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 50px;
+  cursor: pointer;
+  align-self: flex-end;
+}
+
+.save-btn:hover {
+  background: #45a049;
+}
+
+
+
+.close-btn {
+  position: absolute;
+  top: 10px; /* Adjust distance from the top */
+  right: 10px; /* Adjust distance from the right */
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: #666;
+  cursor: pointer;
+  outline: none;
+}
+
+.close-btn:hover {
+  color: #000;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .meal-plan-filters {
+    flex-direction: column; /* Stack filters and button vertically */
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .meal-grid {
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+  }
+
+  .meal-card {
+    width: 90%; /* Full width for smaller screens */
+  }
+
+  .add-plan-btn {
+    align-self: flex-end; /* Align button to the right */
+  }
+}
+
+@media (max-width: 480px) {
+  .meal-card {
+    width: 100%;
+    height: 300px;
+  }
+
+  .meal-plan-header h2 {
+    font-size: 1.6rem; /* Adjust title font size */
+  }
+
+  .add-plan-btn {
+    padding: 5px 10px;
+    font-size: 0.9rem; /* Adjust button size */
+  }
+
+  .dropdown-select {
+    width: 100%; /* Full width dropdowns for small screens */
+  }
+}

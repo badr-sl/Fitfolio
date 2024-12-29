@@ -1,0 +1,6 @@
+com.example.fitfolio.controllers.UserController#saveUser(Lcom/example/fitfolio/entities/Utilisateur;)LResponseEntity;
+false
+a32db0c0e6c8cbdea40bbae989787785
+==
+!unknownMethod! !unknownMethod!
+addNewUser com.example.fitfolio.service.UserService#addNewUser(Lcom/example/fitfolio/entities/Utilisateur;)Lcom/example/fitfolio/dto/UserDto;

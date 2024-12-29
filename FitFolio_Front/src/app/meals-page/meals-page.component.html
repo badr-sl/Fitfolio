@@ -1,0 +1,186 @@
+<div class="meal-plan-container">
+  <!-- Header Section -->
+  <div class="meal-plan-header">
+    <h2>Personal meal plan</h2>
+  </div>
+
+  <!-- Filters Section with Add Plan Button -->
+<div class="meal-plan-filters">
+  <!-- Filters -->
+  <div class="filters-wrapper">
+    <!-- Week Dropdown -->
+    <div class="dropdown">
+      <select [(ngModel)]="selectedWeek" class="dropdown-select" (change)="filterMeals()">
+        <option *ngFor="let week of weeks" [value]="week">{{ week }}</option>
+      </select>
+      <span class="dropdown-arrow">▼</span>
+    </div>
+
+    <!-- Day Dropdown -->
+    <div class="dropdown">
+      <select [(ngModel)]="selectedDay" class="dropdown-select" (change)="fetchWeeklyPlannedMeals()">
+        <option *ngFor="let day of days" [value]="day">{{ day }}</option>
+      </select>
+      <span class="dropdown-arrow">▼</span>
+    </div>
+    
+  </div>
+
+  <!-- Add Plan Button -->
+  <button class="add-plan-btn" (click)="openModal()">+ Add Plan</button>
+</div>
+
+
+  <!-- Meal Grid -->
+  <div class="meal-grid">
+    <div 
+      class="meal-card" 
+      *ngFor="let meal of filteredMeals" 
+      (click)="openInfo(meal)"
+    >
+      <!-- Meal Image -->
+      <img [src]="meal.imageUrl" [alt]="meal.name" class="meal-image" />
+  
+      <!-- Meal Time at the Top -->
+      <div class="meal-card-overlay-top">
+        <span class="meal-time">{{ meal.time }}</span>
+      </div>
+  
+      <!-- Meal Title at the Bottom -->
+      <div class="meal-card-overlay-bottom">
+        {{ meal.name }}
+      </div>
+    </div>
+  </div>
+  
+  <!-- Modal -->
+  <div class="meal-modal" *ngIf="selectedInfo">
+    <div class="meal-modal-overlay" (click)="closeInfo()"></div>
+    <div class="meal-modal-content">
+      <button class="close-modal-btn" (click)="closeInfo()">✖</button>
+      <h2>{{ selectedInfo.name }}</h2>
+      <img [src]="selectedInfo.imageUrl" [alt]="selectedInfo.name" class="modal-meal-image" />
+      <p><strong>Time:</strong> {{ selectedInfo.time }}</p>
+      <p><strong>Ingredients:</strong> {{ selectedInfo.ingredients }}</p>
+      <p><strong>Description:</strong> {{ selectedInfo.description || 'No description available.' }}</p>
+    </div>
+  </div>
+  
+
+
+
+<div class="modal-overlay" *ngIf="isModalOpen">
+  <div class="modal-content">
+    <!-- Close Button -->
+    <button class="close-btn" (click)="closeModal()">✖</button>
+
+
+    <div class="week-navigation">
+      <button (click)="navigateModalWeek('previous')" [disabled]="modalWeek === 1">◀ Previous Week</button>
+      <span>Week {{ modalWeek }}</span>
+      <button (click)="navigateModalWeek('next')">Next Week ▶</button>
+    </div>
+
+      <div class="days-navigation">
+      <button
+        *ngFor="let day of modalDays"
+        [class.active]="modalSelectedDay === day"
+        (click)="selectDayInModal(day)"
+      >
+        {{ day }}
+      </button>
+    </div>
+
+    <h2>Choose Meals for {{ modalSelectedDay }} <span style="color: #5a90b7;"> #Week {{ modalWeek }} </span></h2>
+    <div *ngIf="successMessage" class="success-message" style="color: green;">
+      {{ successMessage }}
+    </div>
+    <div *ngIf="errorMessage" class="error-message" style="color: red;">
+      {{ errorMessage }}
+    </div>
+    <div class="modal-body">
+      <!-- Left Side: Meal Options -->
+      <div class="meal-options">
+        <div class="meal-section">
+          <h4>Breakfast</h4>
+          <div class="meal-grid">
+            <button
+              class="meal-name-btn"
+              *ngFor="let avmeal of breakfastMeals"
+              [class.selected]="avmeal === mealPlan[modalSelectedDay]?.Breakfast"
+              (click)="selectMeal(avmeal, 'Breakfast')"
+            >
+              {{ avmeal.name }}
+            </button>
+          
+          </div>
+        </div>
+    
+        <!-- Lunch Section -->
+        <div class="meal-section">
+          <h4>Lunch</h4>
+          <div class="meal-grid">
+            <button
+            class="meal-name-btn"
+            *ngFor="let avmeal of lunchMeals"
+            [class.selected]="avmeal === mealPlan[modalSelectedDay]?.Lunch"
+            (click)="selectMeal(avmeal, 'Lunch')"
+            >
+              {{ avmeal.name }}
+            </button>
+          </div>
+        </div>
+    
+        <!-- Dinner Section -->
+        <div class="meal-section">
+          <h4>Dinner</h4>
+          <div class="meal-grid">
+            <button
+              class="meal-name-btn"
+              *ngFor="let avmeal of dinnerMeals"
+              [class.selected]="avmeal === mealPlan[modalSelectedDay]?.Dinner"
+              (click)="selectMeal(avmeal, 'Dinner')"
+            >
+              {{ avmeal.name }}
+            </button>
+          </div>
+        </div>
+      </div>
+    
+      <div class="meal-info">
+        <div *ngIf="selectedMeal">
+          <div class="meal-image-wrapper" (scroll)="onScroll($event)">
+            <!-- Meal Image -->
+            <img [src]="selectedMeal.imageUrl" [alt]="selectedMeal.name" class="meal-image" />
+    
+            <!-- Scrollable Meal Details -->
+            <div class="meal-details">
+              <h3>{{ selectedMeal.name }}</h3>
+              <p><strong>Ingredients:</strong> {{ selectedMeal.ingredients }}</p>
+              <p><strong>Preparation Time:</strong> {{ selectedMeal.time }}</p>
+              <p>
+                <strong>Description:</strong>
+                {{ selectedMeal.description }}
+              </p>
+    
+              <!-- Additional Details -->
+              <div *ngIf="showAdditionalDetails" class="additional-details">
+                <h4>Additional Info</h4>
+                <p><strong>Calories:</strong> {{ selectedMeal.calories }}</p>
+                <p><strong>Dietary Notes:</strong> {{ selectedMeal.dietaryNotes }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="!selectedMeal" class="meal-placeholder">
+          <p>Select a meal to view details</p>
+        </div>
+      </div>
+     
+      <!-- Save Button -->
+      <button class="save-btn" (click)="savePlan()">Save Plan</button>
+    </div>
+    
+  </div>
+  
+</div>

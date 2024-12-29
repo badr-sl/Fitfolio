@@ -1,0 +1,79 @@
+
+ccom.example.fitfolio.controllers.UserController#addRoleToUser(Lcom/example/fitfolio/dto/LoginDto;)Vç
+ÇC:/Users/21262/OneDrive/Bureau/5IIR/Projet/POUR TEST 2/fitfolio/src/main/java/com/example/fitfolio/controllers/UserController.java? ?("startingBlock*˜
+startingBlock? ?(Bù
+ö
+> >()
+%4"
+__annotate*+
+
+__unknown_file (
+PostMapping*O
+
+__unknown_file (3
+1
+userRoleForm!com.example.fitfolio.dto.LoginDtoù
+ö
+? ?(+
+%5"
+__annotate*+
+
+__unknown_file (
+RequestBody*O
+
+__unknown_file (3
+1
+userRoleForm!com.example.fitfolio.dto.LoginDtoñ
+ì
+?5 ?(A1
+userRoleForm!com.example.fitfolio.dto.LoginDto"__annotation*"
+
+__unknown_file (
+
+%4*"
+
+__unknown_file (
+
+%5*
+1*π
+1@ @(•
+¢
+@ @(.
+%0(com.example.fitfolio.service.UserService"__id*`
+
+__unknown_file (D*B1
+/com.example.fitfolio.controllers.UserController"
+userService¿Ω
+@ @(5
+%1java.lang.String"=com.example.fitfolio.dto.LoginDto#getUser()Ljava/lang/String;*O
+
+__unknown_file (3
+1
+userRoleForm!com.example.fitfolio.dto.LoginDto2	getUser()¿Ω
+@7 @(M
+%2java.lang.String"=com.example.fitfolio.dto.LoginDto#getRole()Ljava/lang/String;*O
+
+__unknown_file (3
+1
+userRoleForm!com.example.fitfolio.dto.LoginDto2	getRole()Á‰
+@ @(N
+
+%3void"]com.example.fitfolio.service.UserService#addRoleToUser(Ljava/lang/String;Ljava/lang/String;)V*L
+
+__unknown_file (0
+.
+%0(com.example.fitfolio.service.UserService*4
+
+__unknown_file (
+
+%1java.lang.String*4
+
+__unknown_file (
+
+%2java.lang.String23addRoleToUser(Ljava/lang/String;Ljava/lang/String;)"
+A A(
+
+"":=
+? ?(A1
+userRoleForm!com.example.fitfolio.dto.LoginDtoB31
+/com.example.fitfolio.controllers.UserControllerH

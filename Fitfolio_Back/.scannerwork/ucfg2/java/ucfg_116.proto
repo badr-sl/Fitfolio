@@ -1,0 +1,78 @@
+
+}com.example.fitfolio.service.UserService#addNewRole(Lcom/example/fitfolio/entities/Role;)Lcom/example/fitfolio/entities/Role;…
+{C:/Users/21262/OneDrive/Bureau/5IIR/Projet/POUR TEST 2/fitfolio/src/main/java/com/example/fitfolio/service/UserService.javaL L("4*÷
+2N7 N(H¤
+¡
+N7 N(H.
+%6(com.example.fitfolio.repo.RoleRepository"__id*_
+
+__unknown_file (C*A*
+(com.example.fitfolio.service.UserService"
+appRoleRepository<
+:
+N7 N(S
+%4"__id*"
+
+__unknown_file (
+
+%5*
+1*~
+3N( N(4j
+h
+N( N(4
+%4"__id*P
+
+__unknown_file (4
+2
+existingRole"com.example.fitfolio.entities.Role*
+1*ú
+4M M(-¤
+¡
+M M(-.
+%0(com.example.fitfolio.repo.RoleRepository"__id*_
+
+__unknown_file (C*A*
+(com.example.fitfolio.service.UserService"
+appRoleRepositoryÂ¿
+M= M(O
+%1java.lang.String"Bcom.example.fitfolio.entities.Role#getRoleName()Ljava/lang/String;*H
+
+__unknown_file (,
+*
+role"com.example.fitfolio.entities.Role2getRoleName()ÐÍ
+M M(P(
+%2"com.example.fitfolio.entities.Role"ocom.example.fitfolio.repo.RoleRepository#findByRoleName(Ljava/lang/String;)Lcom/example/fitfolio/entities/Role;*L
+
+__unknown_file (0
+.
+%0(com.example.fitfolio.repo.RoleRepository*4
+
+__unknown_file (
+
+%1java.lang.String2"findByRoleName(Ljava/lang/String;)
+Œ
+M M(Q2
+existingRole"com.example.fitfolio.entities.Role"__id*F
+
+__unknown_file (*
+(
+%2"com.example.fitfolio.entities.Role‘
+Ž
+N N($
+%3boolean"	__compare*
+N N(
+!=*@
+N N(4
+2
+existingRole"com.example.fitfolio.entities.Role*
+N  N($
+""*
+2
+3*!
+1N N(T"
+N N(T
+
+%4:6
+L L($*
+role"com.example.fitfolio.entities.RoleB,*
+(com.example.fitfolio.service.UserServiceH

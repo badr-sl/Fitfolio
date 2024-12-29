@@ -1,0 +1,10 @@
+com.example.fitfolio.service.UserService#addRoleToUser(Ljava/lang/String;Ljava/lang/String;)V
+false
+d27d99bd44456199415cb210d4732148
+==
+add java.util.Collection#add(Ljava/lang/Object;)Z
+contains java.util.Collection#contains(Ljava/lang/Object;)Z
+findByRoleName com.example.fitfolio.repo.RoleRepository#findByRoleName(Ljava/lang/String;)Lcom/example/fitfolio/entities/Role;
+findByUsername com.example.fitfolio.repo.UserRepository#findByUsername(Ljava/lang/String;)Lcom/example/fitfolio/entities/Utilisateur;
+getRoles com.example.fitfolio.entities.Utilisateur#getRoles()Ljava/util/Collection;
+println java.io.PrintStream#println(Ljava/lang/String;)V

@@ -1,0 +1,9 @@
+com.example.fitfolio.service.UserService#getAuthorities(Ljava/util/Collection;)Ljava/util/Collection;
+false
+d0351c1bb88b725ffe4efcbd07952f77
+java.util.Collections#emptyList()Ljava/util/List;
+java.util.stream.Collectors#toList()Ljava/util/stream/Collector;
+==
+!unknownMethod! !unknownMethod!
+map java.util.stream.Stream#map(Ljava/util/function/Function;)Ljava/util/stream/Stream;
+stream java.util.Collection#stream()Ljava/util/stream/Stream;

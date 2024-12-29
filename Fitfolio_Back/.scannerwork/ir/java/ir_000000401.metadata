@@ -1,0 +1,9 @@
+com.example.fitfolio.service.UserService#loadUserByUsername(Ljava/lang/String;)LUserDetails;
+false
+532ebad1882a6865536fa29ac48e97ac
+==
+findByUsername com.example.fitfolio.repo.UserRepository#findByUsername(Ljava/lang/String;)Lcom/example/fitfolio/entities/Utilisateur;
+getAuthorities com.example.fitfolio.service.UserService#getAuthorities(Ljava/util/Collection;)Ljava/util/Collection;
+getPassword com.example.fitfolio.entities.Utilisateur#getPassword()Ljava/lang/String;
+getRoles com.example.fitfolio.entities.Utilisateur#getRoles()Ljava/util/Collection;
+getUsername com.example.fitfolio.entities.Utilisateur#getUsername()Ljava/lang/String;

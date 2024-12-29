@@ -1,0 +1,3 @@
+com.example.fitfolio.config.DataInitializer#initData(Lcom/example/fitfolio/repo/UserRepository;Lcom/example/fitfolio/repo/RoleRepository;Lcom/example/fitfolio/repo/RepasRepository;Lcom/example/fitfolio/repo/ActiviteRepository;Lcom/example/fitfolio/repo/PlanningRepository;Lcom/example/fitfolio/service/UserService;)LCommandLineRunner;
+false
+5f9941f8eedc901dab87945bb0a0c97e

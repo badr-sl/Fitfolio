@@ -1,0 +1,47 @@
+
+9__sonar_lambda_0$com.example.fitfolio.service.UserServiceá
+{C:/Users/21262/OneDrive/Bureau/5IIR/Projet/POUR TEST 2/fitfolio/src/main/java/com/example/fitfolio/service/UserService.javaÖ% Ö(d"startingBlock*∂
+startingBlock
+Ö% Ö(dì
+ê
+
+__unknown_file (
+userIdjava.lang.Long"__id*T
+
+__unknown_file (8*6*
+(com.example.fitfolio.service.UserService"
+userId*
+1*ﬂ
+1
+Ö@ Ö(Zá
+Ñ
+
+Ö@ Ö(c
+%3java.lang.String"__concat**
+
+Ö@ Ö(Z
+User not found with id: *(
+
+Ö] Ö(c
+
+userIdjava.lang.LongLJ
+
+Ö/ Ö(? 
+%4java.lang.RuntimeException"java.lang.RuntimeException√
+¿
+
+Ö+ Ö(d
+%5"6java.lang.RuntimeException#<init>(Ljava/lang/String;)V*>
+
+__unknown_file ("
+ 
+%4java.lang.RuntimeException*4
+
+__unknown_file (
+
+%3java.lang.String"0
+
+Ö+ Ö(d"
+ 
+%4java.lang.RuntimeExceptionB
+java.util.function.Supplier

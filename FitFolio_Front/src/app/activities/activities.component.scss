@@ -1,0 +1,159 @@
+/* Conteneur principal pour la formation */
+.training-container {
+  text-align: center; /* Centre le contenu horizontalement */
+  padding: 40px; /* Ajoute un espacement autour du conteneur */
+  z-index: 0; /* Définit la profondeur du conteneur dans la pile des éléments */
+}
+
+/* Section pour le texte d'en-tête */
+.header-text {
+  text-align: left; /* Aligne le texte sur la gauche */
+  margin-left: 10px; /* Ajoute un léger décalage à gauche */
+}
+
+/* Style pour le titre principal (h1) */
+.header-text h1 {
+  font-size: 36px; /* Définit la taille de la police */
+  font-weight: bold; /* Met le texte en gras */
+}
+
+/* Style pour le sous-titre (p) */
+.header-text p {
+  margin-top: -20px; /* Réduit l'espace au-dessus du paragraphe */
+  color: #696969; /* Couleur grise pour le texte */
+}
+
+/* Conteneur des cercles représentant les activités */
+.activity-circles {
+  display: flex; /* Utilise Flexbox pour aligner les éléments */
+  justify-content: center; /* Centre les cercles horizontalement */
+  gap: 20px; /* Espace entre les cercles */
+  margin-top: 70px; /* Ajoute un espacement supérieur */
+  margin-bottom: 20px; /* Ajoute un espacement inférieur */
+}
+
+/* Style pour chaque cercle d'activité */
+.activity-circle {
+  background: #f0f4fa; /* Couleur de fond */
+  border-radius: 50%; /* Rend le cercle parfaitement rond */
+  width: 150px; /* Largeur du cercle */
+  height: 150px; /* Hauteur du cercle */
+  display: flex; /* Utilise Flexbox pour centrer le contenu */
+  align-items: center; /* Centre verticalement le contenu */
+  justify-content: center; /* Centre horizontalement le contenu */
+  transition: border 0.3s; /* Animation lors du survol ou de la sélection */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Ombre douce autour du cercle */
+  cursor: pointer; /* Change le curseur en pointeur */
+}
+
+/* Style pour les images à l'intérieur des cercles */
+.activity-circle img {
+  width: 40%; /* Définit la largeur relative de l'image */
+  height: auto; /* Maintient les proportions de l'image */
+  object-fit: contain; /* S'assure que l'image reste entière dans le cercle */
+}
+
+/* Style pour le cercle sélectionné */
+.activity-circle.selected {
+  border: 3px solid black; /* Ajoute une bordure noire pour indiquer la sélection */
+}
+
+/* Conteneur pour les détails de l'activité sélectionnée */
+.activity-details {
+  position: relative; /* Positionne le conteneur relativement à son parent */
+  background-color: #ffffff; /* Couleur de fond blanche */
+  padding: 50px 20px 50px; /* Espacement interne (haut, gauche/droite, bas) */
+  border-radius: 40px; /* Coins arrondis */
+  width: 90%; /* Prend 90% de la largeur du parent */
+  margin: 0 auto; /* Centre le conteneur horizontalement */
+  z-index: 2; /* Positionne l'élément au-dessus des autres si nécessaire */
+  box-shadow: 0 0 10px rgba(106, 1, 244, 0.3); /* Ombre violette douce */
+  text-align: center; /* Centre le texte */
+  overflow: hidden; /* Cache tout contenu qui dépasse */
+}
+
+/* Contenu des détails de l'activité (centré verticalement et horizontalement) */
+.activity-details .content {
+  display: flex; /* Utilise Flexbox pour organiser les éléments */
+  flex-direction: column; /* Aligne les enfants verticalement */
+  align-items: center; /* Centre les enfants horizontalement */
+}
+
+/* Bouton "Start" (commencer l'activité) */
+.start-btn {
+  margin-top: 10px; /* Ajoute un espacement au-dessus du bouton */
+  display: inline-block; /* Définit un bloc en ligne */
+  padding: 10px 30px; /* Espacement interne (haut/bas, gauche/droite) */
+  font-size: 16px; /* Taille du texte */
+  border: none; /* Supprime les bordures par défaut */
+  background-color: #d4ff00; /* Couleur de fond jaune fluo */
+  color: #000000; /* Texte noir */
+  border-radius: 30px; /* Coins arrondis */
+  cursor: pointer; /* Change le curseur en pointeur */
+  transition: background-color 0.3s; /* Animation douce au survol */
+  position: relative; /* Nécessaire pour un placement flexible */
+  z-index: 3; /* Place le bouton au-dessus des autres éléments */
+}
+
+/* Effet au survol du bouton "Start" */
+.start-btn:hover {
+  background-color: #b7e600; /* Change légèrement la couleur au survol */
+}
+
+/* Bouton "Select Activity" */
+.select-btn {
+  margin-top: 50px; /* Espace important au-dessus du bouton */
+  display: inline-block; /* Définit un bloc en ligne */
+  padding: 10px 30px; /* Espacement interne (haut/bas, gauche/droite) */
+  font-size: 16px; /* Taille du texte */
+  border: none; /* Supprime les bordures par défaut */
+  background-color: rgba(66, 1, 244, 0.685); /* Couleur de fond violette translucide */
+  color: #ffffff; /* Texte blanc */
+  border-radius: 30px; /* Coins arrondis */
+  cursor: pointer; /* Change le curseur en pointeur */
+  transition: background-color 0.3s; /* Animation douce au survol */
+  position: relative; /* Nécessaire pour un placement flexible */
+  z-index: 3; /* Place le bouton au-dessus des autres éléments */
+}
+
+/* Effet au survol du bouton "Select Activity" */
+.select-btn:hover {
+  background-color: rgb(86, 1, 244); /* Couleur violette plus foncée */
+}
+
+/* Section pour afficher les activités passées */
+.history-section {
+  margin: 50px auto; /* Centre la section et ajoute de l'espacement vertical */
+  width: 60%; /* Limite la largeur à 60% du parent */
+}
+
+/* Titre de la section des activités passées */
+.history-section h2 {
+  text-align: left; /* Aligne le titre à gauche */
+  margin-left: 10px; /* Ajoute un petit décalage à gauche */
+  font-size: 24px; /* Taille du texte */
+  font-weight: bold; /* Met le texte en gras */
+}
+
+/* Style pour chaque activité passée */
+.past-activity {
+  display: flex; /* Utilise Flexbox pour aligner les éléments horizontalement */
+  justify-content: space-between; /* Espace égal entre les enfants */
+  align-items: center; /* Centre les enfants verticalement */
+  background: #f0f4fa; /* Couleur de fond douce */
+  border-radius: 15px; /* Coins arrondis */
+  padding: 10px 15px; /* Espacement interne */
+  margin-bottom: 15px; /* Espacement inférieur entre les cartes */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Ombre légère autour de la carte */
+}
+
+/* Informations sur chaque activité passée */
+.past-info {
+  text-align: left; /* Aligne le texte à gauche */
+  font-size: 14px; /* Taille du texte */
+}
+
+/* Icône pour les activités passées */
+.past-icon {
+  width: 50px; /* Taille de l'icône */
+}
