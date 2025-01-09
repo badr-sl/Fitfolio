@@ -7010,7 +7010,7 @@ function(t3) {
     });
   }
   function i2() {
-    return (n.DOMPurify ? Promise.resolve(n.DOMPurify) : import("./purify.es-GVXR55RJ.js")).catch(function(t3) {
+    return (n.DOMPurify ? Promise.resolve(n.DOMPurify) : import("./purify.es-GQATV7QB.js")).catch(function(t3) {
       return Promise.reject(new Error("Could not load dompurify: " + t3));
     }).then(function(t3) {
       return t3.default ? t3.default : t3;
@@ -10543,7 +10543,7 @@ function(t3) {
  */
 function(t3) {
   function e() {
-    return (n.canvg ? Promise.resolve(n.canvg) : import("./index.es-6NHFGMT7.js")).catch(function(t4) {
+    return (n.canvg ? Promise.resolve(n.canvg) : import("./index.es-JDOZQBFL.js")).catch(function(t4) {
       return Promise.reject(new Error("Could not load canvg: " + t4));
     }).then(function(t4) {
       return t4.default ? t4.default : t4;
